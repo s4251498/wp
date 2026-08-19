@@ -27,15 +27,18 @@
 
 <body>
 
+    <!-- Header and Navigation -->
     <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
 
+                <!-- BookVerse Logo -->
                 <a class="navbar-brand" href="index.html">
                     <span class="material-icons">menu_book</span>
                     BookVerse
                 </a>
 
+                <!-- Mobile Navigation Button -->
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -46,6 +49,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <!-- Navigation Links -->
                 <div class="collapse navbar-collapse" id="mainNavigation">
                     <ul class="navbar-nav ms-auto">
 
@@ -80,19 +84,109 @@
         </nav>
     </header>
 
+    <!-- Main Content -->
     <main>
+
         <section class="container py-5">
 
             <div class="text-center mb-5">
                 <h1>Books</h1>
-                <p>Browse the books currently available on BookVerse.</p>
+                <p>Browse the books currently offered by BookVerse.</p>
+            </div>
+
+            <!-- Status Filter -->
+            <div class="row mb-4">
+                <div class="col-12 col-md-6 mx-auto">
+
+                    <label for="statusFilter" class="form-label">
+                        Filter books by status
+                    </label>
+
+                    <select id="statusFilter"
+                            class="form-select">
+
+                        <option value="all">All Books</option>
+                        <option value="Available">Available</option>
+                        <option value="Reserved">Reserved</option>
+                        <option value="Sold">Sold</option>
+
+                    </select>
+
+                </div>
+            </div>
+
+            <!-- Books Table -->
+            <div class="table-responsive">
+
+                <table class="table table-striped table-hover align-middle">
+
+                    <caption class="visually-hidden">
+                        BookVerse books and their current status
+                    </caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Book</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">Condition</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr data-status="Available">
+                            <td>The Silent Patient</td>
+                            <td>Alex Michaelides</td>
+                            <td>Thriller</td>
+                            <td>New</td>
+                            <td>$25.00</td>
+                            <td>Available</td>
+                        </tr>
+
+                        <tr data-status="Reserved">
+                            <td>Where the Crawdads Sing</td>
+                            <td>Delia Owens</td>
+                            <td>Fiction</td>
+                            <td>Gently Used</td>
+                            <td>$18.00</td>
+                            <td>Reserved</td>
+                        </tr>
+
+                        <tr data-status="Sold">
+                            <td>The Midnight Library</td>
+                            <td>Matt Haig</td>
+                            <td>Fantasy</td>
+                            <td>Fair</td>
+                            <td>$12.00</td>
+                            <td>Sold</td>
+                        </tr>
+
+                        <tr data-status="Available">
+                            <td>The Book Thief</td>
+                            <td>Markus Zusak</td>
+                            <td>Historical Fiction</td>
+                            <td>Gently Used</td>
+                            <td>$20.00</td>
+                            <td>Available</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
             </div>
 
         </section>
+
     </main>
 
+    <!-- Footer -->
     <footer class="py-4 mt-5">
         <div class="container text-center">
+
             <p class="mb-0">
                 &copy; 2026 BookVerse. All rights reserved.
             </p>
@@ -100,6 +194,7 @@
             <p class="mb-0">
                 Created by Oliver Heberle
             </p>
+
         </div>
     </footer>
 
