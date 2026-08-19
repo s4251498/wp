@@ -179,5 +179,9 @@ footer p {
 
     .card-img-top {
         height: 250px;
+        
     }
+    .image-preview {
+    max-height: 300px;
+}
 }
