@@ -32,13 +32,11 @@
         <nav class="navbar navbar-expand-lg">
             <div class="container">
 
-                <!-- BookVerse Logo -->
                 <a class="navbar-brand" href="index.html">
                     <span class="material-icons">menu_book</span>
                     BookVerse
                 </a>
 
-                <!-- Mobile Navigation Button -->
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -49,7 +47,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Navigation Links -->
                 <div class="collapse navbar-collapse" id="mainNavigation">
                     <ul class="navbar-nav ms-auto">
 
@@ -86,6 +83,7 @@
 
     <!-- Main Content -->
     <main>
+
         <section class="container py-5">
 
             <div class="text-center mb-5">
@@ -93,12 +91,239 @@
                 <p>Add a new book to the BookVerse collection.</p>
             </div>
 
+            <div class="row justify-content-center">
+
+                <div class="col-12 col-lg-8">
+
+                    <form id="addBookForm">
+
+                        <!-- Book Title -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">
+                                Book Title
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="title"
+                                   name="title"
+                                   placeholder="Enter the book title"
+                                   required>
+                        </div>
+
+                        <!-- Author -->
+                        <div class="mb-3">
+                            <label for="author" class="form-label">
+                                Author Name
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="author"
+                                   name="author"
+                                   placeholder="Enter the author's name"
+                                   required>
+                        </div>
+
+                        <!-- Genre -->
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">
+                                Genre
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="genre"
+                                   name="genre"
+                                   placeholder="Enter the book genre"
+                                   required>
+                        </div>
+
+                        <!-- Publication Year -->
+                        <div class="mb-3">
+                            <label for="publication_year" class="form-label">
+                                Publication Year
+                            </label>
+
+                            <input type="number"
+                                   class="form-control"
+                                   id="publication_year"
+                                   name="publication_year"
+                                   placeholder="Enter the publication year"
+                                   required>
+                        </div>
+
+                        <!-- ISBN -->
+                        <div class="mb-3">
+                            <label for="isbn" class="form-label">
+                                ISBN
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   id="isbn"
+                                   name="isbn"
+                                   placeholder="Enter the ISBN"
+                                   required>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">
+                                Description
+                            </label>
+
+                            <textarea class="form-control"
+                                      id="description"
+                                      name="description"
+                                      rows="5"
+                                      placeholder="Enter a description of the book"
+                                      required></textarea>
+                        </div>
+
+                        <!-- Book Condition -->
+                        <div class="mb-3">
+                            <label for="book_condition" class="form-label">
+                                Book Condition
+                            </label>
+
+                            <select class="form-select"
+                                    id="book_condition"
+                                    name="book_condition"
+                                    required>
+
+                                <option value="" selected disabled>
+                                    Select book condition
+                                </option>
+
+                                <option value="New">
+                                    New
+                                </option>
+
+                                <option value="Gently Used">
+                                    Gently Used
+                                </option>
+
+                                <option value="Fair">
+                                    Fair
+                                </option>
+
+                            </select>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-3">
+                            <label for="price" class="form-label">
+                                Price
+                            </label>
+
+                            <input type="number"
+                                   class="form-control"
+                                   id="price"
+                                   name="price"
+                                   placeholder="Enter the price"
+                                   min="0"
+                                   step="0.01"
+                                   required>
+                        </div>
+
+                        <!-- Cover Image -->
+                        <div class="mb-3">
+                            <label for="image_path" class="form-label">
+                                Upload Cover Image
+                            </label>
+
+                            <input type="file"
+                                   class="form-control"
+                                   id="image_path"
+                                   name="image_path"
+                                   accept=".jpg,.jpeg,.png,.gif,.webp"
+                                   required>
+
+                            <div class="form-text">
+                                Accepted image types: JPG, JPEG, PNG, GIF and WEBP.
+                            </div>
+                        </div>
+
+                        <!-- Image Preview -->
+                        <div class="mb-4 text-center">
+                            <img id="imagePreview"
+                                 src=""
+                                 alt="Selected book cover preview"
+                                 class="img-fluid d-none"
+                                 style="max-height: 300px;">
+                        </div>
+
+                        <!-- Status -->
+                        <div class="mb-3">
+                            <label for="status" class="form-label">
+                                Status
+                            </label>
+
+                            <select class="form-select"
+                                    id="status"
+                                    name="status"
+                                    required>
+
+                                <option value="" selected disabled>
+                                    Select book status
+                                </option>
+
+                                <option value="Available">
+                                    Available
+                                </option>
+
+                                <option value="Reserved">
+                                    Reserved
+                                </option>
+
+                                <option value="Sold">
+                                    Sold
+                                </option>
+
+                            </select>
+                        </div>
+
+                        <!-- Agreement -->
+                        <div class="form-check mb-4">
+
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   id="agree"
+                                   name="agree"
+                                   required>
+
+                            <label class="form-check-label"
+                                   for="agree">
+                                I agree that this book information is accurate and complete
+                            </label>
+
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="d-grid">
+
+                            <button type="submit"
+                                    class="btn btn-primary">
+                                Add Book
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
         </section>
+
     </main>
 
     <!-- Footer -->
     <footer class="py-4 mt-5">
         <div class="container text-center">
+
             <p class="mb-0">
                 &copy; 2026 BookVerse. All rights reserved.
             </p>
@@ -106,6 +331,7 @@
             <p class="mb-0">
                 Created by Oliver Heberle
             </p>
+
         </div>
     </footer>
 
