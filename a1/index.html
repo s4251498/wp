@@ -85,9 +85,105 @@
     </nav>
 </header>
 
-    <main>
+   <main>
+    <section class="hero-carousel" aria-label="Featured Book Collections">
 
-    </main>
+        <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
+
+            <!-- Carousel indicators -->
+            <div class="carousel-indicators">
+                <button type="button"
+                        data-bs-target="#bookCarousel"
+                        data-bs-slide-to="0"
+                        class="active"
+                        aria-current="true"
+                        aria-label="Slide 1"></button>
+
+                <button type="button"
+                        data-bs-target="#bookCarousel"
+                        data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+
+                <button type="button"
+                        data-bs-target="#bookCarousel"
+                        data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+
+                <button type="button"
+                        data-bs-target="#bookCarousel"
+                        data-bs-slide-to="3"
+                        aria-label="Slide 4"></button>
+            </div>
+
+            <!-- Carousel images -->
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <img src="assets/images/1.png"
+                         class="d-block w-100"
+                         alt="Featured books collection">
+                    <div class="carousel-caption">
+                        <h1>Discover Your Next Great Read</h1>
+                        <p>Explore our collection of books at BookVerse.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets/images/2.png"
+                         class="d-block w-100"
+                         alt="Book collection available at BookVerse">
+                    <div class="carousel-caption">
+                        <h2>Explore New Stories</h2>
+                        <p>Find something new to add to your collection.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets/images/3.png"
+                         class="d-block w-100"
+                         alt="Featured books from BookVerse">
+                    <div class="carousel-caption">
+                        <h2>Find Your Next Favourite</h2>
+                        <p>Browse books from a range of genres.</p>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <img src="assets/images/4.png"
+                         class="d-block w-100"
+                         alt="BookVerse book collection">
+                    <div class="carousel-caption">
+                        <h2>Books for Every Reader</h2>
+                        <p>Discover books waiting to be explored.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Previous button -->
+            <button class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#bookCarousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"
+                      aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+
+            <!-- Next button -->
+            <button class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#bookCarousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon"
+                      aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+        </div>
+
+    </section>
+</main>
 
     <footer>
 
