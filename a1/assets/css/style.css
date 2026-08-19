@@ -1,0 +1,183 @@
+/* =========================================
+   BookVerse - Assessment 1
+   Custom Styles
+   ========================================= */
+
+/* ---------- Colour Variables ---------- */
+
+:root {
+    --primary: #0d9488;
+    --primary-dark: #0f766e;
+    --primary-light: #14b8a6;
+
+    --secondary: #d97706;
+    --secondary-dark: #b45309;
+
+    --accent-amber: #fbbf24;
+    --accent-green: #10b981;
+    --accent-slate: #475569;
+
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+
+    --background-light: #f9fafb;
+    --background-white: #ffffff;
+    --border: #e5e7eb;
+}
+
+
+/* ---------- General Page Styling ---------- */
+
+body {
+    font-family: "Elms Sans", sans-serif;
+    color: var(--text-dark);
+    background-color: var(--background-light);
+    line-height: 1.6;
+}
+
+
+/* ---------- Headings ---------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.navbar-brand {
+    font-family: "Righteous", cursive;
+}
+
+
+/* ---------- Navigation ---------- */
+
+.navbar {
+    background-color: var(--primary) !important;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.navbar-brand .material-icons {
+    vertical-align: middle;
+    margin-right: 0.25rem;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--accent-amber) !important;
+}
+
+
+/* ---------- Carousel ---------- */
+
+.hero-carousel {
+    background-color: var(--primary-dark);
+}
+
+.hero-carousel .carousel-item img {
+    height: 450px;
+    object-fit: cover;
+}
+
+.hero-carousel .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.55);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.hero-carousel .carousel-caption h1,
+.hero-carousel .carousel-caption h2 {
+    color: var(--background-white);
+}
+
+
+/* ---------- Featured Books ---------- */
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    background-color: var(--background-white);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    height: 300px;
+    object-fit: cover;
+}
+
+.card-title {
+    color: var(--primary-dark);
+}
+
+.card-text {
+    color: var(--text-light);
+}
+
+
+/* ---------- Buttons ---------- */
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+
+/* ---------- Footer ---------- */
+
+footer {
+    background-color: var(--primary-dark);
+    color: var(--background-white);
+}
+
+footer p {
+    margin-bottom: 0.25rem;
+}
+
+
+/* ---------- Responsive Design ---------- */
+
+@media (max-width: 991.98px) {
+    .hero-carousel .carousel-item img {
+        height: 350px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-carousel .carousel-item img {
+        height: 250px;
+    }
+
+    .hero-carousel .carousel-caption {
+        padding: 0.75rem;
+    }
+
+    .hero-carousel .carousel-caption h1,
+    .hero-carousel .carousel-caption h2 {
+        font-size: 1.25rem;
+    }
+
+    .hero-carousel .carousel-caption p {
+        font-size: 0.85rem;
+    }
+
+    .card-img-top {
+        height: 250px;
+    }
+}
