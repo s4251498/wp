@@ -2,41 +2,49 @@
 <html lang="en">
 
 <head>
+    <!-- Set character encoding -->
     <meta charset="UTF-8">
+
+    <!-- Make the page responsive on different screen sizes -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Page title shown in the browser tab -->
     <title>BookVerse | Add Book</title>
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS framework -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts used throughout the website -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:wght@400;500;600;700&family=Righteous&display=swap"
           rel="stylesheet">
 
-    <!-- Material Icons -->
+    <!-- Material Icons used for website icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
 
-    <!-- Custom CSS -->
+    <!-- Custom BookVerse stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
-    <!-- Header and Navigation -->
+    <!-- ==================== HEADER & NAVIGATION ==================== -->
     <header>
         <nav class="navbar navbar-expand-lg">
+
+            <!-- Bootstrap container keeps the navigation content aligned -->
             <div class="container">
 
+                <!-- BookVerse logo and link back to homepage -->
                 <a class="navbar-brand" href="index.html">
                     <span class="material-icons">menu_book</span>
                     BookVerse
                 </a>
 
+                <!-- Button used to open/close the navigation menu on smaller screens -->
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -47,27 +55,34 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+                <!-- Collapsible navigation menu -->
                 <div class="collapse navbar-collapse" id="mainNavigation">
+
+                    <!-- Navigation links -->
                     <ul class="navbar-nav ms-auto">
 
+                        <!-- Home page -->
                         <li class="nav-item">
                             <a class="nav-link" href="index.html">
                                 Home
                             </a>
                         </li>
 
+                        <!-- Books page -->
                         <li class="nav-item">
                             <a class="nav-link" href="books.html">
                                 Books
                             </a>
                         </li>
 
+                        <!-- Gallery page -->
                         <li class="nav-item">
                             <a class="nav-link" href="gallery.html">
                                 Gallery
                             </a>
                         </li>
 
+                        <!-- Current page is highlighted as active -->
                         <li class="nav-item">
                             <a class="nav-link active" href="add.html">
                                 Add Book
@@ -81,28 +96,38 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
+
+    <!-- ==================== MAIN CONTENT ==================== -->
     <main>
 
+        <!-- Bootstrap container provides responsive page spacing -->
         <section class="container py-5">
 
+            <!-- Page heading -->
             <div class="text-center mb-5">
                 <h1>Add a Book</h1>
                 <p>Add a new book to the BookVerse collection.</p>
             </div>
 
+            <!-- Centre the form horizontally -->
             <div class="row justify-content-center">
 
+                <!-- Form takes full width on small screens and 8 columns on large screens -->
                 <div class="col-12 col-lg-8">
 
+                    <!-- Add Book form -->
                     <form id="addBookForm">
 
-                        <!-- Book Title -->
+
+                        <!-- ==================== BOOK TITLE ==================== -->
                         <div class="mb-3">
+
+                            <!-- Label is associated with the title input using the "for" attribute -->
                             <label for="title" class="form-label">
                                 Book Title
                             </label>
 
+                            <!-- Required text input for the book title -->
                             <input type="text"
                                    class="form-control"
                                    id="title"
@@ -111,12 +136,16 @@
                                    required>
                         </div>
 
-                        <!-- Author -->
+
+                        <!-- ==================== AUTHOR ==================== -->
                         <div class="mb-3">
+
+                            <!-- Author input label -->
                             <label for="author" class="form-label">
                                 Author Name
                             </label>
 
+                            <!-- Required text input for the author's name -->
                             <input type="text"
                                    class="form-control"
                                    id="author"
@@ -125,12 +154,16 @@
                                    required>
                         </div>
 
-                        <!-- Genre -->
+
+                        <!-- ==================== GENRE ==================== -->
                         <div class="mb-3">
+
+                            <!-- Genre input label -->
                             <label for="genre" class="form-label">
                                 Genre
                             </label>
 
+                            <!-- Required text input for the book genre -->
                             <input type="text"
                                    class="form-control"
                                    id="genre"
@@ -139,12 +172,16 @@
                                    required>
                         </div>
 
-                        <!-- Publication Year -->
+
+                        <!-- ==================== PUBLICATION YEAR ==================== -->
                         <div class="mb-3">
+
+                            <!-- Publication year label -->
                             <label for="publication_year" class="form-label">
                                 Publication Year
                             </label>
 
+                            <!-- Number input for the book's publication year -->
                             <input type="number"
                                    class="form-control"
                                    id="publication_year"
@@ -153,12 +190,16 @@
                                    required>
                         </div>
 
-                        <!-- ISBN -->
+
+                        <!-- ==================== ISBN ==================== -->
                         <div class="mb-3">
+
+                            <!-- ISBN input label -->
                             <label for="isbn" class="form-label">
                                 ISBN
                             </label>
 
+                            <!-- Required text input for the ISBN -->
                             <input type="text"
                                    class="form-control"
                                    id="isbn"
@@ -167,12 +208,16 @@
                                    required>
                         </div>
 
-                        <!-- Description -->
+
+                        <!-- ==================== DESCRIPTION ==================== -->
                         <div class="mb-3">
+
+                            <!-- Description field label -->
                             <label for="description" class="form-label">
                                 Description
                             </label>
 
+                            <!-- Textarea allows the user to enter a longer description -->
                             <textarea class="form-control"
                                       id="description"
                                       name="description"
@@ -181,29 +226,37 @@
                                       required></textarea>
                         </div>
 
-                        <!-- Book Condition -->
+
+                        <!-- ==================== BOOK CONDITION ==================== -->
                         <div class="mb-3">
+
+                            <!-- Condition dropdown label -->
                             <label for="book_condition" class="form-label">
                                 Book Condition
                             </label>
 
+                            <!-- Dropdown containing the available book conditions -->
                             <select class="form-select"
                                     id="book_condition"
                                     name="book_condition"
                                     required>
 
+                                <!-- Placeholder option -->
                                 <option value="" selected disabled>
                                     Select book condition
                                 </option>
 
+                                <!-- New book option -->
                                 <option value="New">
                                     New
                                 </option>
 
+                                <!-- Gently used book option -->
                                 <option value="Gently Used">
                                     Gently Used
                                 </option>
 
+                                <!-- Fair condition option -->
                                 <option value="Fair">
                                     Fair
                                 </option>
@@ -211,12 +264,16 @@
                             </select>
                         </div>
 
-                        <!-- Price -->
+
+                        <!-- ==================== PRICE ==================== -->
                         <div class="mb-3">
+
+                            <!-- Price input label -->
                             <label for="price" class="form-label">
                                 Price
                             </label>
 
+                            <!-- Number input allowing prices with two decimal places -->
                             <input type="number"
                                    class="form-control"
                                    id="price"
@@ -227,12 +284,20 @@
                                    required>
                         </div>
 
-                        <!-- Cover Image -->
+
+                        <!-- ==================== COVER IMAGE ==================== -->
                         <div class="mb-3">
+
+                            <!-- File upload label -->
                             <label for="image_path" class="form-label">
                                 Upload Cover Image
                             </label>
 
+                            <!--
+                                File input for the book cover.
+                                The accept attribute limits the selectable file types.
+                                JavaScript also validates the extension.
+                            -->
                             <input type="file"
                                    class="form-control"
                                    id="image_path"
@@ -240,42 +305,57 @@
                                    accept=".jpg,.jpeg,.png,.gif,.webp"
                                    required>
 
+                            <!-- Tell the user which image formats are accepted -->
                             <div class="form-text">
                                 Accepted image types: JPG, JPEG, PNG, GIF and WEBP.
                             </div>
                         </div>
 
-                        <!-- Image Preview -->
+
+                        <!-- ==================== IMAGE PREVIEW ==================== -->
                         <div class="mb-4 text-center">
+
+                            <!--
+                                Image preview is initially hidden using Bootstrap's d-none class.
+                                JavaScript displays this image after a valid file is selected.
+                            -->
                             <img id="imagePreview"
                                  src=""
                                  alt="Selected book cover preview"
                                  class="img-fluid d-none">
                         </div>
 
-                        <!-- Status -->
+
+                        <!-- ==================== BOOK STATUS ==================== -->
                         <div class="mb-3">
+
+                            <!-- Status dropdown label -->
                             <label for="status" class="form-label">
                                 Status
                             </label>
 
+                            <!-- Dropdown for selecting the book's current status -->
                             <select class="form-select"
                                     id="status"
                                     name="status"
                                     required>
 
+                                <!-- Placeholder option -->
                                 <option value="" selected disabled>
                                     Select book status
                                 </option>
 
+                                <!-- Available status -->
                                 <option value="Available">
                                     Available
                                 </option>
 
+                                <!-- Reserved status -->
                                 <option value="Reserved">
                                     Reserved
                                 </option>
 
+                                <!-- Sold status -->
                                 <option value="Sold">
                                     Sold
                                 </option>
@@ -283,15 +363,22 @@
                             </select>
                         </div>
 
-                        <!-- Agreement -->
+
+                        <!-- ==================== AGREEMENT ==================== -->
                         <div class="form-check mb-4">
 
+                            <!--
+                                Required checkbox.
+                                The form cannot be submitted unless the user agrees
+                                that the information entered is accurate.
+                            -->
                             <input class="form-check-input"
                                    type="checkbox"
                                    id="agree"
                                    name="agree"
                                    required>
 
+                            <!-- Checkbox label -->
                             <label class="form-check-label"
                                    for="agree">
                                 I agree that this book information is accurate and complete
@@ -299,9 +386,11 @@
 
                         </div>
 
-                        <!-- Submit -->
+
+                        <!-- ==================== SUBMIT BUTTON ==================== -->
                         <div class="d-grid">
 
+                            <!-- Submit button for the Add Book form -->
                             <button type="submit"
                                     class="btn btn-primary">
                                 Add Book
@@ -319,14 +408,18 @@
 
     </main>
 
-    <!-- Footer -->
+
+    <!-- ==================== FOOTER ==================== -->
     <footer class="py-4 mt-5">
+
         <div class="container text-center">
 
+            <!-- Copyright information -->
             <p class="mb-0">
                 &copy; 2026 BookVerse. All rights reserved.
             </p>
 
+            <!-- Student/project attribution -->
             <p class="mb-0">
                 Created by Oliver Heberle
             </p>
@@ -334,10 +427,13 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JavaScript -->
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+
+    <!-- Bootstrap JavaScript bundle provides components such as the mobile navbar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom JavaScript -->
+    <!-- Custom JavaScript for form validation and image preview -->
     <script src="assets/js/scripts.js"></script>
 
 </body>
