@@ -32,6 +32,7 @@
 <body>
 
     <!-- ==================== HEADER & NAVIGATION ==================== -->
+
     <header>
         <nav class="navbar navbar-expand-lg">
 
@@ -90,214 +91,226 @@
                         </li>
 
                     </ul>
+
                 </div>
 
             </div>
+
         </nav>
     </header>
 
 
     <!-- ==================== MAIN CONTENT ==================== -->
+
     <main>
 
-        <!-- Bootstrap container provides responsive page spacing -->
         <section class="container py-5">
 
             <!-- Page heading -->
-            <div class="text-center mb-5">
-                <h1>Add a Book</h1>
-                <p>Add a new book to the BookVerse collection.</p>
+            <div class="mb-4">
+
+                <h1>
+                    <span class="material-icons text-success align-middle">
+                        add_box
+                    </span>
+                    Add New Book
+                </h1>
+
             </div>
+
 
             <!-- Centre the form horizontally -->
             <div class="row justify-content-center">
 
                 <!-- Form takes full width on small screens and 8 columns on large screens -->
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-lg-9">
 
                     <!-- Add Book form -->
-                    <form id="addBookForm">
+                    <form id="addBookForm" class="form-container p-4 rounded">
 
 
-                        <!-- ==================== BOOK TITLE ==================== -->
-                        <div class="mb-3">
+                        <!-- ==================== BOOK TITLE & AUTHOR ==================== -->
 
-                            <!-- Label is associated with the title input using the "for" attribute -->
-                            <label for="title" class="form-label">
-                                Book Title
-                            </label>
+                        <div class="row">
 
-                            <!-- Required text input for the book title -->
-                            <input type="text"
-                                   class="form-control"
-                                   id="title"
-                                   name="title"
-                                   placeholder="Enter the book title"
-                                   required>
-                        </div>
+                            <!-- Book Title -->
+                            <div class="col-md-6 mb-3">
+
+                                <label for="title" class="form-label">
+                                    Book Title
+                                </label>
+
+                                <input type="text"
+                                       class="form-control"
+                                       id="title"
+                                       name="title"
+                                       placeholder="Enter book title"
+                                       required>
+
+                            </div>
 
 
-                        <!-- ==================== AUTHOR ==================== -->
-                        <div class="mb-3">
+                            <!-- Author Name -->
+                            <div class="col-md-6 mb-3">
 
-                            <!-- Author input label -->
-                            <label for="author" class="form-label">
-                                Author Name
-                            </label>
+                                <label for="author" class="form-label">
+                                    Author Name
+                                </label>
 
-                            <!-- Required text input for the author's name -->
-                            <input type="text"
-                                   class="form-control"
-                                   id="author"
-                                   name="author"
-                                   placeholder="Enter the author's name"
-                                   required>
+                                <input type="text"
+                                       class="form-control"
+                                       id="author"
+                                       name="author"
+                                       placeholder="Enter author name"
+                                       required>
+
+                            </div>
+
                         </div>
 
 
                         <!-- ==================== GENRE ==================== -->
+
                         <div class="mb-3">
 
-                            <!-- Genre input label -->
                             <label for="genre" class="form-label">
                                 Genre
                             </label>
 
-                            <!-- Required text input for the book genre -->
                             <input type="text"
                                    class="form-control"
                                    id="genre"
                                    name="genre"
-                                   placeholder="Enter the book genre"
+                                   placeholder="Enter book genre"
                                    required>
+
                         </div>
 
 
-                        <!-- ==================== PUBLICATION YEAR ==================== -->
-                        <div class="mb-3">
+                        <!-- ==================== PUBLICATION YEAR & PRICE ==================== -->
 
-                            <!-- Publication year label -->
-                            <label for="publication_year" class="form-label">
-                                Publication Year
-                            </label>
+                        <div class="row">
 
-                            <!-- Number input for the book's publication year -->
-                            <input type="number"
-                                   class="form-control"
-                                   id="publication_year"
-                                   name="publication_year"
-                                   placeholder="Enter the publication year"
-                                   required>
+                            <!-- Publication Year -->
+                            <div class="col-md-6 mb-3">
+
+                                <label for="publication_year" class="form-label">
+                                    Publication Year
+                                </label>
+
+                                <input type="number"
+                                       class="form-control"
+                                       id="publication_year"
+                                       name="publication_year"
+                                       placeholder="2024"
+                                       required>
+
+                            </div>
+
+
+                            <!-- Price -->
+                            <div class="col-md-6 mb-3">
+
+                                <label for="price" class="form-label">
+                                    Price ($)
+                                </label>
+
+                                <input type="number"
+                                       class="form-control"
+                                       id="price"
+                                       name="price"
+                                       placeholder="19.99"
+                                       min="0"
+                                       step="0.01"
+                                       required>
+
+                            </div>
+
                         </div>
 
 
-                        <!-- ==================== ISBN ==================== -->
-                        <div class="mb-3">
+                        <!-- ==================== ISBN & BOOK CONDITION ==================== -->
 
-                            <!-- ISBN input label -->
-                            <label for="isbn" class="form-label">
-                                ISBN
-                            </label>
+                        <div class="row">
 
-                            <!-- Required text input for the ISBN -->
-                            <input type="text"
-                                   class="form-control"
-                                   id="isbn"
-                                   name="isbn"
-                                   placeholder="Enter the ISBN"
-                                   required>
+                            <!-- ISBN -->
+                            <div class="col-md-6 mb-3">
+
+                                <label for="isbn" class="form-label">
+                                    ISBN
+                                </label>
+
+                                <input type="text"
+                                       class="form-control"
+                                       id="isbn"
+                                       name="isbn"
+                                       placeholder="978-1-234567-89-0"
+                                       required>
+
+                            </div>
+
+
+                            <!-- Book Condition -->
+                            <div class="col-md-6 mb-3">
+
+                                <label for="book_condition" class="form-label">
+                                    Book Condition
+                                </label>
+
+                                <select class="form-select"
+                                        id="book_condition"
+                                        name="book_condition"
+                                        required>
+
+                                    <option value="" selected disabled>
+                                        Select condition
+                                    </option>
+
+                                    <option value="New">
+                                        New
+                                    </option>
+
+                                    <option value="Gently Used">
+                                        Gently Used
+                                    </option>
+
+                                    <option value="Fair">
+                                        Fair
+                                    </option>
+
+                                </select>
+
+                            </div>
+
                         </div>
 
 
                         <!-- ==================== DESCRIPTION ==================== -->
+
                         <div class="mb-3">
 
-                            <!-- Description field label -->
                             <label for="description" class="form-label">
                                 Description
                             </label>
 
-                            <!-- Textarea allows the user to enter a longer description -->
                             <textarea class="form-control"
                                       id="description"
                                       name="description"
                                       rows="5"
                                       placeholder="Enter a description of the book"
                                       required></textarea>
-                        </div>
 
-
-                        <!-- ==================== BOOK CONDITION ==================== -->
-                        <div class="mb-3">
-
-                            <!-- Condition dropdown label -->
-                            <label for="book_condition" class="form-label">
-                                Book Condition
-                            </label>
-
-                            <!-- Dropdown containing the available book conditions -->
-                            <select class="form-select"
-                                    id="book_condition"
-                                    name="book_condition"
-                                    required>
-
-                                <!-- Placeholder option -->
-                                <option value="" selected disabled>
-                                    Select book condition
-                                </option>
-
-                                <!-- New book option -->
-                                <option value="New">
-                                    New
-                                </option>
-
-                                <!-- Gently used book option -->
-                                <option value="Gently Used">
-                                    Gently Used
-                                </option>
-
-                                <!-- Fair condition option -->
-                                <option value="Fair">
-                                    Fair
-                                </option>
-
-                            </select>
-                        </div>
-
-
-                        <!-- ==================== PRICE ==================== -->
-                        <div class="mb-3">
-
-                            <!-- Price input label -->
-                            <label for="price" class="form-label">
-                                Price
-                            </label>
-
-                            <!-- Number input allowing prices with two decimal places -->
-                            <input type="number"
-                                   class="form-control"
-                                   id="price"
-                                   name="price"
-                                   placeholder="Enter the price"
-                                   min="0"
-                                   step="0.01"
-                                   required>
                         </div>
 
 
                         <!-- ==================== COVER IMAGE ==================== -->
+
                         <div class="mb-3">
 
-                            <!-- File upload label -->
                             <label for="image_path" class="form-label">
                                 Upload Cover Image
                             </label>
 
-                            <!--
-                                File input for the book cover.
-                                The accept attribute limits the selectable file types.
-                                JavaScript also validates the extension.
-                            -->
                             <input type="file"
                                    class="form-control"
                                    id="image_path"
@@ -305,98 +318,96 @@
                                    accept=".jpg,.jpeg,.png,.gif,.webp"
                                    required>
 
-                            <!-- Tell the user which image formats are accepted -->
                             <div class="form-text">
                                 Accepted image types: JPG, JPEG, PNG, GIF and WEBP.
                             </div>
+
                         </div>
 
 
                         <!-- ==================== IMAGE PREVIEW ==================== -->
+
                         <div class="mb-4 text-center">
 
-                            <!--
-                                Image preview is initially hidden using Bootstrap's d-none class.
-                                JavaScript displays this image after a valid file is selected.
-                            -->
                             <img id="imagePreview"
                                  src=""
                                  alt="Selected book cover preview"
-                                 class="img-fluid d-none">
+                                 class="img-fluid image-preview d-none">
+
                         </div>
 
 
-                        <!-- ==================== BOOK STATUS ==================== -->
+                        <!-- ==================== AVAILABILITY STATUS ==================== -->
+
                         <div class="mb-3">
 
-                            <!-- Status dropdown label -->
                             <label for="status" class="form-label">
-                                Status
+                                Availability Status
                             </label>
 
-                            <!-- Dropdown for selecting the book's current status -->
                             <select class="form-select"
                                     id="status"
                                     name="status"
                                     required>
 
-                                <!-- Placeholder option -->
                                 <option value="" selected disabled>
-                                    Select book status
+                                    Select status
                                 </option>
 
-                                <!-- Available status -->
                                 <option value="Available">
                                     Available
                                 </option>
 
-                                <!-- Reserved status -->
                                 <option value="Reserved">
                                     Reserved
                                 </option>
 
-                                <!-- Sold status -->
                                 <option value="Sold">
                                     Sold
                                 </option>
 
                             </select>
+
                         </div>
 
 
                         <!-- ==================== AGREEMENT ==================== -->
+
                         <div class="form-check mb-4">
 
-                            <!--
-                                Required checkbox.
-                                The form cannot be submitted unless the user agrees
-                                that the information entered is accurate.
-                            -->
                             <input class="form-check-input"
                                    type="checkbox"
                                    id="agree"
                                    name="agree"
                                    required>
 
-                            <!-- Checkbox label -->
                             <label class="form-check-label"
                                    for="agree">
+
                                 I agree that this book information is accurate and complete
+
                             </label>
 
                         </div>
 
 
                         <!-- ==================== SUBMIT BUTTON ==================== -->
+
                         <div class="d-grid">
 
-                            <!-- Submit button for the Add Book form -->
                             <button type="submit"
                                     class="btn btn-primary">
-                                Add Book
+
+                                <span class="material-icons align-middle">
+                                    library_add
+                                </span>
+
+                                Add Book to Collection
+
                             </button>
 
                         </div>
+
 
                     </form>
 
@@ -410,21 +421,21 @@
 
 
     <!-- ==================== FOOTER ==================== -->
+
     <footer class="py-4 mt-5">
 
         <div class="container text-center">
 
-            <!-- Copyright information -->
             <p class="mb-0">
                 &copy; 2026 BookVerse. All rights reserved.
             </p>
 
-            <!-- Student/project attribution -->
             <p class="mb-0">
                 Created by Oliver Heberle
             </p>
 
         </div>
+
     </footer>
 
 

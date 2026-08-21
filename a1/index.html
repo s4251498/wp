@@ -19,6 +19,7 @@
     <!-- Google Fonts used throughout the website -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Righteous&display=swap"
           rel="stylesheet">
 
@@ -31,74 +32,110 @@
 
 </head>
 
+
 <body>
 
+
     <!-- ==================== HEADER & NAVIGATION ==================== -->
+
     <header>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg">
 
-            <!-- Bootstrap container keeps the navigation content aligned -->
             <div class="container">
 
                 <!-- BookVerse logo and brand name -->
-                <a class="navbar-brand" href="index.html">
-                    <span class="material-icons">menu_book</span>
+
+                <a class="navbar-brand"
+                   href="index.html">
+
+                    <span class="material-icons">
+                        menu_book
+                    </span>
+
                     BookVerse
+
                 </a>
 
-                <!--
-                    Mobile navigation button.
-                    Bootstrap's collapse component hides and shows
-                    the navigation links on smaller screens.
-                -->
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#mainNavigation"
-                    aria-controls="mainNavigation"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
+
+                <!-- Mobile navigation button -->
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavigation"
+                        aria-controls="mainNavigation"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
 
                     <span class="navbar-toggler-icon"></span>
 
                 </button>
 
 
-                <!-- ==================== NAVIGATION LINKS ==================== -->
-                <div class="collapse navbar-collapse" id="mainNavigation">
+                <!-- Navigation links -->
 
-                    <!-- Navigation links aligned to the right -->
+                <div class="collapse navbar-collapse"
+                     id="mainNavigation">
+
                     <ul class="navbar-nav ms-auto">
 
-                        <!-- Current page is marked as active -->
+
+                        <!-- Home -->
+
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.html">
+
+                            <a class="nav-link active"
+                               href="index.html">
+
                                 Home
+
                             </a>
+
                         </li>
 
-                        <!-- Books page -->
+
+                        <!-- Books -->
+
                         <li class="nav-item">
-                            <a class="nav-link" href="books.html">
+
+                            <a class="nav-link"
+                               href="books.html">
+
                                 Books
+
                             </a>
+
                         </li>
 
-                        <!-- Gallery page -->
+
+                        <!-- Gallery -->
+
                         <li class="nav-item">
-                            <a class="nav-link" href="gallery.html">
+
+                            <a class="nav-link"
+                               href="gallery.html">
+
                                 Gallery
+
                             </a>
+
                         </li>
 
-                        <!-- Add Book page -->
+
+                        <!-- Add Book -->
+
                         <li class="nav-item">
-                            <a class="nav-link" href="add.html">
+
+                            <a class="nav-link"
+                               href="add.html">
+
                                 Add Book
+
                             </a>
+
                         </li>
+
 
                     </ul>
 
@@ -112,22 +149,16 @@
 
 
     <!-- ==================== MAIN CONTENT ==================== -->
+
     <main>
 
 
         <!-- ==================== HERO CAROUSEL ==================== -->
 
-        <!--
-            Hero carousel displays featured book collections.
-            aria-label provides a description for screen readers.
-        -->
-        <section class="hero-carousel" aria-label="Featured Book Collections">
+        <section class="hero-carousel"
+                 aria-label="Featured Book Collections">
 
-            <!--
-                Bootstrap carousel component.
-                data-bs-ride="carousel" allows the carousel
-                to automatically cycle through the slides.
-            -->
+
             <div id="bookCarousel"
                  class="carousel slide"
                  data-bs-ride="carousel">
@@ -135,13 +166,11 @@
 
                 <!-- ==================== CAROUSEL INDICATORS ==================== -->
 
-                <!--
-                    These buttons allow the user to jump directly
-                    to a specific carousel slide.
-                -->
                 <div class="carousel-indicators">
 
-                    <!-- Slide 1 is active when the page loads -->
+
+                    <!-- Slide 1 -->
+
                     <button type="button"
                             data-bs-target="#bookCarousel"
                             data-bs-slide-to="0"
@@ -150,26 +179,33 @@
                             aria-label="Slide 1">
                     </button>
 
+
                     <!-- Slide 2 -->
+
                     <button type="button"
                             data-bs-target="#bookCarousel"
                             data-bs-slide-to="1"
                             aria-label="Slide 2">
                     </button>
 
+
                     <!-- Slide 3 -->
+
                     <button type="button"
                             data-bs-target="#bookCarousel"
                             data-bs-slide-to="2"
                             aria-label="Slide 3">
                     </button>
 
+
                     <!-- Slide 4 -->
+
                     <button type="button"
                             data-bs-target="#bookCarousel"
                             data-bs-slide-to="3"
                             aria-label="Slide 4">
                     </button>
+
 
                 </div>
 
@@ -180,20 +216,18 @@
 
 
                     <!-- Slide 1 -->
+
                     <div class="carousel-item active">
 
-                        <!--
-                            d-block and w-100 are Bootstrap classes
-                            used to display the image as a full-width block.
-                        -->
                         <img src="assets/images/1.png"
                              class="d-block w-100"
                              alt="Featured books collection">
 
-                        <!-- Text displayed over the carousel image -->
                         <div class="carousel-caption">
 
-                            <h1>Discover Your Next Great Read</h1>
+                            <h1>
+                                Discover Your Next Great Read
+                            </h1>
 
                             <p>
                                 Explore our collection of books at BookVerse.
@@ -205,6 +239,7 @@
 
 
                     <!-- Slide 2 -->
+
                     <div class="carousel-item">
 
                         <img src="assets/images/2.png"
@@ -213,7 +248,9 @@
 
                         <div class="carousel-caption">
 
-                            <h2>Explore New Stories</h2>
+                            <h2>
+                                Explore New Stories
+                            </h2>
 
                             <p>
                                 Find something new to add to your collection.
@@ -225,6 +262,7 @@
 
 
                     <!-- Slide 3 -->
+
                     <div class="carousel-item">
 
                         <img src="assets/images/3.png"
@@ -233,7 +271,9 @@
 
                         <div class="carousel-caption">
 
-                            <h2>Find Your Next Favourite</h2>
+                            <h2>
+                                Find Your Next Favourite
+                            </h2>
 
                             <p>
                                 Browse books from a range of genres.
@@ -245,6 +285,7 @@
 
 
                     <!-- Slide 4 -->
+
                     <div class="carousel-item">
 
                         <img src="assets/images/4.png"
@@ -253,7 +294,9 @@
 
                         <div class="carousel-caption">
 
-                            <h2>Books for Every Reader</h2>
+                            <h2>
+                                Books for Every Reader
+                            </h2>
 
                             <p>
                                 Discover books waiting to be explored.
@@ -269,7 +312,9 @@
 
                 <!-- ==================== CAROUSEL CONTROLS ==================== -->
 
-                <!-- Previous slide button -->
+
+                <!-- Previous slide -->
+
                 <button class="carousel-control-prev"
                         type="button"
                         data-bs-target="#bookCarousel"
@@ -279,7 +324,6 @@
                           aria-hidden="true">
                     </span>
 
-                    <!-- Hidden text makes the control accessible to screen readers -->
                     <span class="visually-hidden">
                         Previous
                     </span>
@@ -287,7 +331,8 @@
                 </button>
 
 
-                <!-- Next slide button -->
+                <!-- Next slide -->
+
                 <button class="carousel-control-next"
                         type="button"
                         data-bs-target="#bookCarousel"
@@ -297,7 +342,6 @@
                           aria-hidden="true">
                     </span>
 
-                    <!-- Hidden text makes the control accessible to screen readers -->
                     <span class="visually-hidden">
                         Next
                     </span>
@@ -312,20 +356,22 @@
 
         <!-- ==================== FEATURED BOOKS ==================== -->
 
-        <!--
-            Featured Books section.
-            aria-labelledby connects the section to its heading
-            for improved accessibility.
-        -->
         <section class="container py-5"
                  aria-labelledby="featured-books-heading">
 
 
             <!-- Section heading -->
+
             <div class="text-center mb-5">
 
                 <h2 id="featured-books-heading">
+
+                    <span class="material-icons text-success align-middle">
+                        auto_stories
+                    </span>
+
                     Featured Books
+
                 </h2>
 
                 <p>
@@ -335,11 +381,8 @@
             </div>
 
 
-            <!--
-                Bootstrap responsive grid.
-                The cards change from one column on small screens
-                to four columns on large screens.
-            -->
+            <!-- ==================== BOOK GRID ==================== -->
+
             <div class="row g-4">
 
 
@@ -347,19 +390,13 @@
 
                 <div class="col-12 col-sm-6 col-lg-3">
 
-                    <!--
-                        Article is used because each book is an
-                        independent piece of content.
-                    -->
                     <article class="card h-100">
 
-                        <!-- Book cover -->
                         <img src="assets/images/covers/1.png"
                              class="card-img-top"
                              alt="Book cover 1">
 
 
-                        <!-- Book information -->
                         <div class="card-body d-flex flex-column">
 
                             <h3 class="card-title h5">
@@ -370,13 +407,11 @@
                                 A psychological mystery filled with twists and secrets.
                             </p>
 
-                            <!--
-                                mt-auto pushes the button to the bottom
-                                of the card so all cards remain aligned.
-                            -->
                             <a href="books.html"
                                class="btn btn-primary mt-auto">
+
                                 View Books
+
                             </a>
 
                         </div>
@@ -396,6 +431,7 @@
                              class="card-img-top"
                              alt="Book cover 2">
 
+
                         <div class="card-body d-flex flex-column">
 
                             <h3 class="card-title h5">
@@ -408,7 +444,9 @@
 
                             <a href="books.html"
                                class="btn btn-primary mt-auto">
+
                                 View Books
+
                             </a>
 
                         </div>
@@ -428,6 +466,7 @@
                              class="card-img-top"
                              alt="Book cover 3">
 
+
                         <div class="card-body d-flex flex-column">
 
                             <h3 class="card-title h5">
@@ -440,7 +479,9 @@
 
                             <a href="books.html"
                                class="btn btn-primary mt-auto">
+
                                 View Books
+
                             </a>
 
                         </div>
@@ -460,6 +501,7 @@
                              class="card-img-top"
                              alt="Book cover 4">
 
+
                         <div class="card-body d-flex flex-column">
 
                             <h3 class="card-title h5">
@@ -472,7 +514,9 @@
 
                             <a href="books.html"
                                class="btn btn-primary mt-auto">
+
                                 View Books
+
                             </a>
 
                         </div>
@@ -486,6 +530,7 @@
 
         </section>
 
+
     </main>
 
 
@@ -495,12 +540,10 @@
 
         <div class="container text-center">
 
-            <!-- Copyright information -->
             <p class="mb-0">
                 &copy; 2026 BookVerse. All rights reserved.
             </p>
 
-            <!-- Student/project attribution -->
             <p class="mb-0">
                 Created by Oliver Heberle
             </p>
@@ -512,10 +555,7 @@
 
     <!-- ==================== JAVASCRIPT ==================== -->
 
-    <!--
-        Bootstrap JavaScript bundle provides functionality
-        for the responsive navigation and carousel.
-    -->
+    <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom BookVerse JavaScript -->

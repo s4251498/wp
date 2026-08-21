@@ -3,9 +3,11 @@
    Custom Styles
    ========================================= */
 
+
 /* ---------- Colour Variables ---------- */
 
 :root {
+    /* Required Assessment Colours */
     --primary: #0d9488;
     --primary-dark: #0f766e;
     --primary-light: #14b8a6;
@@ -23,6 +25,13 @@
     --background-light: #f9fafb;
     --background-white: #ffffff;
     --border: #e5e7eb;
+
+    /* Screenshot Theme Colours */
+    --navy-dark: #03091c;
+    --navy: #0c1528;
+    --navy-light: #111c31;
+    --blue-nav: #063755;
+    --panel: #1c2838;
 }
 
 
@@ -30,8 +39,8 @@
 
 body {
     font-family: "Elms Sans", sans-serif;
-    color: var(--text-dark);
-    background-color: var(--background-light);
+    color: var(--background-white);
+    background-color: var(--navy-dark);
     line-height: 1.6;
 }
 
@@ -52,20 +61,24 @@ h6,
 /* ---------- Navigation ---------- */
 
 .navbar {
-    background-color: var(--primary) !important;
+    background-color: var(--blue-nav) !important;
+    border-bottom: 3px solid var(--primary-light);
 }
 
 .navbar-brand {
     font-size: 1.5rem;
+    color: var(--background-white) !important;
 }
 
 .navbar-brand .material-icons {
     vertical-align: middle;
     margin-right: 0.25rem;
+    color: var(--accent-amber);
 }
 
 .nav-link {
     font-weight: 500;
+    color: var(--background-white) !important;
 }
 
 .nav-link:hover,
@@ -74,10 +87,39 @@ h6,
 }
 
 
+/* ---------- Main Content ---------- */
+
+main {
+    background-color: var(--navy-dark);
+    min-height: 500px;
+}
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+    color: var(--background-white);
+}
+
+
+/* ---------- Page Section Headings ---------- */
+
+.section-title {
+    color: var(--background-white);
+}
+
+.section-title .material-icons {
+    color: var(--primary);
+    vertical-align: middle;
+}
+
+
 /* ---------- Carousel ---------- */
 
 .hero-carousel {
-    background-color: var(--primary-dark);
+    background-color: var(--navy);
 }
 
 .hero-carousel .carousel-item img {
@@ -104,12 +146,13 @@ h6,
     border-radius: 0.75rem;
     overflow: hidden;
     background-color: var(--background-white);
+    color: var(--text-dark);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
 }
 
 .card-img-top {
@@ -133,9 +176,141 @@ h6,
     border-color: var(--primary);
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus {
     background-color: var(--primary-dark);
     border-color: var(--primary-dark);
+}
+
+.btn-warning {
+    background-color: var(--accent-amber);
+    border-color: var(--accent-amber);
+    color: var(--text-dark);
+}
+
+.btn-success {
+    background-color: var(--accent-green);
+    border-color: var(--accent-green);
+}
+
+.btn-secondary {
+    background-color: var(--accent-slate);
+    border-color: var(--accent-slate);
+}
+
+
+/* ---------- Tables ---------- */
+
+.table {
+    background-color: var(--background-white);
+    color: var(--text-dark);
+    border-color: var(--border);
+}
+
+.table thead {
+    background-color: var(--navy-light);
+    color: var(--background-white);
+}
+
+.table tbody tr {
+    background-color: var(--background-white);
+}
+
+.table tbody tr:hover {
+    background-color: var(--background-light);
+}
+
+
+/* ---------- Forms ---------- */
+
+.form-container {
+    background-color: var(--panel);
+    color: var(--background-white);
+}
+
+.form-control,
+.form-select {
+    background-color: var(--navy);
+    border: 1px solid var(--border);
+    color: var(--background-white);
+}
+
+.form-control::placeholder {
+    color: var(--text-light);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--navy);
+    color: var(--background-white);
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 0.2rem rgba(20, 184, 166, 0.25);
+}
+
+.form-label {
+    color: var(--background-white);
+}
+
+.form-text {
+    color: var(--text-light);
+}
+
+
+/* ---------- Gallery ---------- */
+
+.gallery-image {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.03);
+}
+
+.gallery-image-button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.gallery-image-button:focus {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 4px;
+}
+
+
+/* ---------- Modal ---------- */
+
+.modal-content {
+    background-color: var(--panel);
+    color: var(--background-white);
+    border: none;
+}
+
+.modal-header {
+    background-color: var(--primary);
+    color: var(--background-white);
+    border-bottom: none;
+}
+
+.modal-header .btn-close {
+    filter: brightness(0) invert(1);
+}
+
+.modal-body {
+    background-color: var(--panel);
+}
+
+.modal-footer {
+    background-color: var(--navy);
+    border-top: none;
 }
 
 
@@ -144,6 +319,7 @@ h6,
 footer {
     background-color: var(--primary-dark);
     color: var(--background-white);
+    border-top: 3px solid var(--accent-amber);
 }
 
 footer p {
@@ -151,15 +327,46 @@ footer p {
 }
 
 
+/* ---------- Availability Status ---------- */
+
+.status-available {
+    background-color: var(--accent-green);
+    color: var(--background-white);
+}
+
+.status-reserved {
+    background-color: var(--accent-amber);
+    color: var(--text-dark);
+}
+
+.status-sold {
+    background-color: var(--accent-slate);
+    color: var(--background-white);
+}
+
+
+/* ---------- Image Preview ---------- */
+
+.image-preview {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+
 /* ---------- Responsive Design ---------- */
 
 @media (max-width: 991.98px) {
+
     .hero-carousel .carousel-item img {
         height: 350px;
     }
+
 }
 
+
 @media (max-width: 575.98px) {
+
     .hero-carousel .carousel-item img {
         height: 250px;
     }
@@ -179,9 +386,14 @@ footer p {
 
     .card-img-top {
         height: 250px;
-        
     }
+
+    .gallery-image {
+        height: 280px;
+    }
+
     .image-preview {
-    max-height: 300px;
-}
+        max-height: 300px;
+    }
+
 }

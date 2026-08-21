@@ -18,6 +18,7 @@
     <!-- Google Fonts used throughout the website -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Elms+Sans:wght@400;500;600;700&family=Righteous&display=swap"
           rel="stylesheet">
 
@@ -29,26 +30,31 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
+
 <body>
 
     <!-- ==================== HEADER & NAVIGATION ==================== -->
+
     <header>
+
         <nav class="navbar navbar-expand-lg">
 
-            <!-- Bootstrap container keeps the navigation content aligned -->
             <div class="container">
 
                 <!-- BookVerse logo links back to the homepage -->
                 <a class="navbar-brand" href="index.html">
-                    <span class="material-icons">menu_book</span>
+
+                    <span class="material-icons">
+                        menu_book
+                    </span>
+
                     BookVerse
+
                 </a>
 
-                <!--
-                    Mobile navigation button.
-                    Bootstrap's collapse component hides the navigation
-                    links on smaller screens.
-                -->
+
+                <!-- Mobile navigation button -->
+
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -56,89 +62,122 @@
                         aria-controls="mainNavigation"
                         aria-expanded="false"
                         aria-label="Toggle navigation">
+
                     <span class="navbar-toggler-icon"></span>
+
                 </button>
 
-                <!-- ==================== NAVIGATION LINKS ==================== -->
-                <div class="collapse navbar-collapse" id="mainNavigation">
 
-                    <!-- Navigation links aligned to the right -->
+                <!-- Navigation links -->
+
+                <div class="collapse navbar-collapse"
+                     id="mainNavigation">
+
                     <ul class="navbar-nav ms-auto">
 
-                        <!-- Home page -->
+                        <!-- Home -->
+
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">
+
+                            <a class="nav-link"
+                               href="index.html">
+
                                 Home
+
                             </a>
+
                         </li>
 
-                        <!-- Books page -->
+
+                        <!-- Books -->
+
                         <li class="nav-item">
-                            <a class="nav-link" href="books.html">
+
+                            <a class="nav-link"
+                               href="books.html">
+
                                 Books
+
                             </a>
+
                         </li>
 
-                        <!-- Current page is marked as active -->
+
+                        <!-- Gallery -->
+
                         <li class="nav-item">
-                            <a class="nav-link active" href="gallery.html">
+
+                            <a class="nav-link active"
+                               href="gallery.html">
+
                                 Gallery
+
                             </a>
+
                         </li>
 
-                        <!-- Add Book page -->
+
+                        <!-- Add Book -->
+
                         <li class="nav-item">
-                            <a class="nav-link" href="add.html">
+
+                            <a class="nav-link"
+                               href="add.html">
+
                                 Add Book
+
                             </a>
+
                         </li>
 
                     </ul>
+
                 </div>
 
             </div>
+
         </nav>
+
     </header>
 
 
     <!-- ==================== MAIN CONTENT ==================== -->
+
     <main>
 
-        <!-- Bootstrap container provides responsive spacing and width -->
         <section class="container py-5">
 
-            <!-- Gallery page heading -->
-            <div class="text-center mb-5">
-                <h1>Book Gallery</h1>
-                <p>Explore the BookVerse collection.</p>
+
+            <!-- ==================== PAGE HEADING ==================== -->
+
+            <div class="mb-4">
+
+                <h1>
+
+                    <span class="material-icons text-success align-middle">
+                        collections
+                    </span>
+
+                    Book Gallery
+
+                </h1>
+
+                <p class="text-light">
+                    Explore the BookVerse collection.
+                </p>
+
             </div>
 
 
             <!-- ==================== GALLERY GRID ==================== -->
 
-            <!--
-                Bootstrap row creates the responsive gallery layout.
-                The g-4 class adds spacing between gallery items.
-            -->
             <div class="row g-4">
 
 
                 <!-- ==================== BOOK IMAGE 1 ==================== -->
 
-                <!--
-                    Bootstrap responsive columns:
-                    - col-12: 1 image per row on very small screens
-                    - col-sm-6: 2 images per row on small screens
-                    - col-md-4: 3 images per row on medium screens
-                    - col-lg-3: 4 images per row on large screens
-                -->
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
-                    <!--
-                        Clicking the image opens the Bootstrap modal.
-                        data-image and data-title are read by JavaScript
-                        to determine which image and title to display.
-                    -->
                     <button type="button"
                             class="gallery-image-button"
                             data-bs-toggle="modal"
@@ -146,16 +185,17 @@
                             data-image="assets/images/covers/1.png"
                             data-title="Book cover 1">
 
-                        <!-- Responsive book cover image -->
                         <img src="assets/images/covers/1.png"
                              class="img-fluid gallery-image"
                              alt="Book cover 1">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 2 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -170,10 +210,12 @@
                              alt="Book cover 2">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 3 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -188,10 +230,12 @@
                              alt="Book cover 3">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 4 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -206,10 +250,12 @@
                              alt="Book cover 4">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 5 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -224,10 +270,12 @@
                              alt="Book cover 5">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 6 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -242,10 +290,12 @@
                              alt="Book cover 6">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 7 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -260,10 +310,12 @@
                              alt="Book cover 7">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 8 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -278,10 +330,12 @@
                              alt="Book cover 8">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 9 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -296,10 +350,12 @@
                              alt="Book cover 9">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 10 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -314,10 +370,12 @@
                              alt="Book cover 10">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 11 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -332,10 +390,12 @@
                              alt="Book cover 11">
 
                     </button>
+
                 </div>
 
 
                 <!-- ==================== BOOK IMAGE 12 ==================== -->
+
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
 
                     <button type="button"
@@ -350,6 +410,7 @@
                              alt="Book cover 12">
 
                     </button>
+
                 </div>
 
 
@@ -362,36 +423,29 @@
 
     <!-- ==================== BOOTSTRAP IMAGE MODAL ==================== -->
 
-    <!--
-        Bootstrap modal used to display a larger version of
-        the selected book cover.
-    -->
     <div class="modal fade"
          id="imageModal"
          tabindex="-1"
          aria-labelledby="imageModalLabel"
          aria-hidden="true">
 
-        <!--
-            modal-lg makes the modal larger on desktop.
-            modal-dialog-centered vertically centres it on the page.
-        -->
         <div class="modal-dialog modal-lg modal-dialog-centered">
 
             <div class="modal-content">
 
-                <!-- Modal header contains the title and close button -->
+
+                <!-- Modal header -->
+
                 <div class="modal-header">
 
-                    <!--
-                        JavaScript can update this title when
-                        a gallery image is selected.
-                    -->
-                    <h2 class="modal-title fs-5" id="imageModalLabel">
+                    <h2 class="modal-title fs-5"
+                        id="imageModalLabel">
+
                         Book Cover
+
                     </h2>
 
-                    <!-- Bootstrap close button -->
+
                     <button type="button"
                             class="btn-close"
                             data-bs-dismiss="modal"
@@ -401,19 +455,17 @@
                 </div>
 
 
-                <!-- ==================== MODAL IMAGE ==================== -->
+                <!-- Modal image -->
+
                 <div class="modal-body text-center">
 
-                    <!--
-                        JavaScript changes the src attribute of this image
-                        to the selected gallery image.
-                    -->
                     <img id="modalImage"
                          src=""
                          class="img-fluid"
                          alt="Selected book cover">
 
                 </div>
+
 
             </div>
 
@@ -423,36 +475,30 @@
 
 
     <!-- ==================== FOOTER ==================== -->
+
     <footer class="py-4 mt-5">
 
         <div class="container text-center">
 
-            <!-- Copyright information -->
             <p class="mb-0">
                 &copy; 2026 BookVerse. All rights reserved.
             </p>
 
-            <!-- Student/project attribution -->
             <p class="mb-0">
                 Created by Oliver Heberle
             </p>
 
         </div>
+
     </footer>
 
 
     <!-- ==================== JAVASCRIPT ==================== -->
 
-    <!--
-        Bootstrap JavaScript bundle provides functionality
-        for the responsive navbar and image modal.
-    -->
+    <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!--
-        Custom JavaScript handles the gallery image selection
-        and updates the Bootstrap modal.
-    -->
+    <!-- Custom JavaScript -->
     <script src="assets/js/scripts.js"></script>
 
 </body>
