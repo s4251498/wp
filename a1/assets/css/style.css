@@ -123,19 +123,21 @@ main h6 {
 }
 
 .hero-carousel .carousel-item img {
-    height: 450px;
+    height: 140px;
     object-fit: cover;
 }
 
 .hero-carousel .carousel-caption {
     background-color: rgba(0, 0, 0, 0.55);
-    padding: 1.5rem;
-    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
 }
 
 .hero-carousel .carousel-caption h1,
 .hero-carousel .carousel-caption h2 {
     color: var(--background-white);
+    margin-bottom: 0;
+    font-size: 1rem;
 }
 
 
@@ -156,16 +158,32 @@ main h6 {
 }
 
 .card-img-top {
-    height: 300px;
+    height: 150px;
     object-fit: cover;
 }
 
 .card-title {
-    color: var(--primary-dark);
+    color: var(--text-dark);
 }
 
 .card-text {
     color: var(--text-light);
+}
+
+
+/* ---------- Featured Books Spacing ---------- */
+
+.container.py-5 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+#featured-books-heading {
+    font-size: 1.5rem;
+}
+
+#featured-books-heading + p {
+    font-size: 0.9rem;
 }
 
 
@@ -188,14 +206,37 @@ main h6 {
     color: var(--text-dark);
 }
 
+.btn-warning:hover,
+.btn-warning:focus {
+    background-color: #f59e0b;
+    border-color: #f59e0b;
+    color: var(--text-dark);
+}
+
 .btn-success {
     background-color: var(--accent-green);
     border-color: var(--accent-green);
+    color: var(--background-white);
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background-color: #059669;
+    border-color: #059669;
+    color: var(--background-white);
 }
 
 .btn-secondary {
     background-color: var(--accent-slate);
     border-color: var(--accent-slate);
+    color: var(--background-white);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #334155;
+    border-color: #334155;
+    color: var(--background-white);
 }
 
 
@@ -359,7 +400,11 @@ footer p {
 @media (max-width: 991.98px) {
 
     .hero-carousel .carousel-item img {
-        height: 350px;
+        height: 180px;
+    }
+
+    .card-img-top {
+        height: 180px;
     }
 
 }
@@ -368,20 +413,20 @@ footer p {
 @media (max-width: 575.98px) {
 
     .hero-carousel .carousel-item img {
-        height: 250px;
+        height: 200px;
     }
 
     .hero-carousel .carousel-caption {
-        padding: 0.75rem;
+        padding: 0.5rem;
     }
 
     .hero-carousel .carousel-caption h1,
     .hero-carousel .carousel-caption h2 {
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
 
     .hero-carousel .carousel-caption p {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .card-img-top {
