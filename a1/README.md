@@ -341,7 +341,7 @@ Git and GitHub were used throughout the development of the BookVerse Assessment 
 
 The project is stored in the GitHub repository:
 
-`git@github.com:s4251498/wp.git`
+`https://github.com/s4251498/wp`
 
 The Assessment 1 website is contained within the `a1` directory.
 
