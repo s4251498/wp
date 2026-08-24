@@ -8,7 +8,7 @@
 | Student name | Oliver Heberle |
 | Student ID | S4251498 |
 | GitHub repository URL | https://github.com/s4251498/wp |
-| Deployed website URL | https://titan.csit.rmit.edu.au/~s4251498/wp/a1/index.html |
+| Deployed website URL | https://titan.csit.rmit.edu.au/~s4251498/wp/a1/ |
 
 ---
 
