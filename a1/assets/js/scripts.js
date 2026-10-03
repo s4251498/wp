@@ -305,7 +305,7 @@ if (addBookForm) {
 
             alert("Please select an availability status.");
 
-            status.focus();
+            stats.focus();
 
             return;
         }
