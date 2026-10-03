@@ -12,8 +12,6 @@ $server = isset($_SERVER['SERVER_NAME'])
 
 /*
  * Check whether the site is running locally.
- * strpos() is used instead of str_contains() for compatibility
- * with older PHP versions on the RMIT server.
  */
 if (
     $server === 'localhost' ||
@@ -27,18 +25,19 @@ if (
     $dbName = 'bookverse';
 
 } else {
-    // RMIT Jupiter / Coreteaching settings
-    $dbHost = 'localhost';
-    $dbUser = 's4251498';
+    // RMIT Jupiter / Jacob 5 settings
+    $dbHost = 'talsprddb02.int.its.rmit.edu.au';
+    $dbUser = 'S4251498';
     $dbPass = 'R3dYvhNE0309171910!!!';
-    $dbName = 's4251498';
+    $dbName = 'S4251498_159009';
 }
 
 $conn = mysqli_connect(
     $dbHost,
     $dbUser,
     $dbPass,
-    $dbName
+    $dbName,
+    3306
 );
 
 if (!$conn) {
