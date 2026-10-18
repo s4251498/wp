@@ -111,22 +111,34 @@ The supplied HTML grading report has conflicting naming and scoring descriptions
 ## AI Task 2
 
 **Date:**  
+18/10/2026
 
 **Task Description:**  
+Create the initial AT3 shared PHP infrastructure and carry forward the established design and JavaScript patterns without copying the AT2 database credential.
 
 **Tool Used:**  
+ChatGPT / Codex
 
 **Prompt / Input:**  
+The assessment brief requires MySQLi, secure sessions and flash messages, reusable header/navigation/footer includes, a single CSS and JavaScript file, prepared statements for later queries, and protection of production credentials. The user asked to start work in the existing `a3/` directory and keep the four-day work plan balanced.
 
 **AI Output Summary:**  
+Codex added environment-based database configuration, reusable session/escaping/flash/CSRF/access helpers, shared page includes, an AT2-derived stylesheet and JavaScript foundation, and a four-stage project plan. It kept the Jacob 5 credential out of the new files.
 
 **What You Accepted:**  
+Keep the required procedural MySQLi connection; default local settings only on localhost; require server environment variables for non-local database credentials; escape shared output; use session-backed flash messages; make the logout control a CSRF-token POST form; reuse the existing BookVerse visual foundation.
 
 **What You Changed:**  
+The helper initially used PHP's `never` return type. After reviewing the AT2 history's older-server compatibility fix, it was removed to avoid requiring PHP 8.1. The live database settings remain environment variables because no deployment credentials were provided.
 
 **Validation Performed:**  
+`node --check a3/assets/js/scripts.js` passed, `git diff --check` passed after a whitespace correction, and the new connection file was inspected to confirm it reads configuration from environment variables instead of containing a password. PHP syntax and database behavior remain unverified because PHP/MySQL are not installed or configured in this workspace.
 
 **Issues Identified:**  
+The local environment has no PHP runtime, so the PHP includes cannot yet be linted or exercised here. The copied JavaScript features still need browser testing when their pages are implemented. No live deployment credential or local database setup was invented.
+
+**Related Commit:**  
+`e2dc298` — https://github.com/s4251498/wp/commit/e2dc298
 
 ---
 
