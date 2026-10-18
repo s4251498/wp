@@ -137,7 +137,7 @@ The helper initially used PHP's `never` return type. After reviewing the AT2 his
 **Issues Identified:**  
 The local environment has no PHP runtime, so the PHP includes cannot yet be linted or exercised here. The copied JavaScript features still need browser testing when their pages are implemented. No live deployment credential or local database setup was invented.
 
-**Related Commit:**  
+**Related Commit:**
 `e2dc298` — https://github.com/s4251498/wp/commit/e2dc298
 
 ---
