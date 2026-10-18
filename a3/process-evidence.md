@@ -103,7 +103,7 @@ Compared the repository tree and commit log with the checked-out repository, rea
 **Issues Identified:**  
 The supplied HTML grading report has conflicting naming and scoring descriptions and is not a trustworthy implementation/test record. The repository's existing AT2 database connection contains a committed live credential; the account owner should rotate it. No credential value is reproduced here.
 
-**Related Commit:**  
+**Related Commit:**
 `846baaa` — https://github.com/s4251498/wp/commit/846baaa
 
 ---
