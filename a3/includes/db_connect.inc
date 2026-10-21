@@ -25,7 +25,13 @@ try {
         throw new RuntimeException('Database environment is incomplete.');
     }
 
-    $conn = mysqli_connect($dbHost, $dbUser, $dbPass ?: '', $dbName, 3306);
+    $portValue = getenv('BOOKVERSE_DB_PORT') ?: '3306';
+    $dbPort = filter_var($portValue, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 65535]]);
+    if ($dbPort === false) {
+        throw new RuntimeException('Database port configuration is invalid.');
+    }
+
+    $conn = mysqli_connect($dbHost, $dbUser, $dbPass ?: '', $dbName, (int) $dbPort);
     mysqli_set_charset($conn, 'utf8mb4');
 } catch (Throwable $error) {
     error_log('BookVerse database connection failed: ' . $error->getMessage());
