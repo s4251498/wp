@@ -32,6 +32,23 @@ function bv_set_flash(string $type, string $message): void
     ];
 }
 
+function bv_post_string(array $source, string $key, bool $trim = true): string
+{
+    if (!isset($source[$key]) || !is_string($source[$key])) {
+        return '';
+    }
+    return $trim ? trim($source[$key]) : $source[$key];
+}
+
+function bv_login_user(int $userId, string $username): void
+{
+    bv_start_session();
+    session_regenerate_id(true);
+    unset($_SESSION['csrf_token']);
+    $_SESSION['user_id'] = $userId;
+    $_SESSION['username'] = $username;
+}
+
 function bv_take_flashes(): array
 {
     bv_start_session();
