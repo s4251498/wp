@@ -404,6 +404,18 @@ img {
     padding: 2rem;
 }
 
+.form-card .page-header {
+    padding-top: 0;
+}
+
+.form-card .page-header h1 {
+    color: var(--primary-dark);
+}
+
+.form-card .page-header .lead {
+    color: var(--text-light);
+}
+
 .form-label {
     font-weight: 600;
     color: var(--text-dark);
