@@ -13,9 +13,25 @@ if (!bv_verify_csrf(bv_post_string($_POST, 'csrf_token'))) {
     bv_redirect('index.php');
 }
 
-// Rotate the identifier so the authenticated session is invalidated while a
-// fresh anonymous session can carry the logout flash message.
+// Destroy the authenticated session and start a new anonymous session for the
+// flash message that confirms logout.
+$sessionName = session_name();
+$cookieParameters = session_get_cookie_params();
+if (ini_get('session.use_cookies')) {
+    setcookie(
+        $sessionName,
+        '',
+        time() - 42000,
+        $cookieParameters['path'],
+        $cookieParameters['domain'],
+        $cookieParameters['secure'],
+        $cookieParameters['httponly']
+    );
+    unset($_COOKIE[$sessionName]);
+}
 $_SESSION = [];
-session_regenerate_id(true);
+session_destroy();
+session_id('');
+bv_start_session();
 bv_set_flash('info', 'You have been logged out.');
 bv_redirect('index.php');
