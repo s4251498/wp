@@ -112,6 +112,37 @@ Reviewed the CSS cascade and calculated contrast on white: `#0f766e` is 5.47:1 a
 
 ---
 
+## Bug 4
+
+**Date Identified:**
+28/10/2026
+
+**Date Fixed:**
+28/10/2026
+
+**File:**
+`gallery.php`, `assets/js/scripts.js`
+
+**Related Commit:**
+`dbc877d` — https://github.com/s4251498/wp/commit/dbc877d
+
+**Symptom:**
+The gallery's accessible button held the modal's image/title data, but the JavaScript selected the nested image element and read data attributes from the wrong element.
+
+**Steps to Reproduce:**
+Open the gallery and activate a cover. The modal handler would run on the image, whose `data-image` and `data-title` attributes were absent.
+
+**Root Cause:**
+The gallery markup was changed from a directly activated image to a native button without updating the JavaScript selector to match the new trigger.
+
+**Fix:**
+Updated the script to bind to `.gallery-image-button`, where the modal data is stored. Native button keyboard activation now supplies keyboard access without a duplicate custom key handler.
+
+**Verification:**
+Compared the trigger selector and data attributes between the PHP markup and JavaScript. This is a static code review; browser interaction testing is still pending for Day 4.
+
+---
+
 # 🤖 Section 2: AI Usage Log
 
 ## AI Task 1
@@ -247,6 +278,40 @@ The XAMPP runtime and temporary database were available for isolated tests. Publ
 
 **Related Commit:**
 `f2bc85a` — https://github.com/s4251498/wp/commit/f2bc85a
+
+---
+
+## AI Task 5
+
+**Date:**
+28/10/2026
+
+**Task Description:**
+Implement the public BookVerse browsing experience scheduled for Day 3.
+
+**Tool Used:**
+ChatGPT / Codex
+
+**Prompt / Input:**
+The user asked to continue Day 3 of the agreed four-day AT3 plan. The planned scope is the home, books, details, gallery, seller, and search pages, with the status filter, image modal, owner controls, responsive layout, and database-backed content.
+
+**AI Output Summary:**
+Added six public pages and a catalog helper for prepared database reads, safe cover paths, status classes, and reusable book cards. The homepage queries only the four latest listings; details and seller queries validate IDs; search uses a prepared statement; owner-only edit/delete controls are shown on details; gallery and status-filter markup use the existing shared JavaScript.
+
+**What You Accepted:**
+Keep all project work within `a3/`, continue using the supplied schema and shared includes, use procedural MySQLi, and leave integration/browser checks for Day 4 rather than claiming unrun tests.
+
+**What You Changed:**
+Adjusted the gallery JavaScript trigger to use the data-bearing native button, bounded the search query length, and added responsive/keyboard focus styling for the gallery and empty homepage state.
+
+**Validation Performed:**
+Reviewed page queries against the schema fields and inspected the gallery markup/script selector relationship. No PHP lint, browser, database, device-width, or rendered HTML checks have yet been run for this Day 3 implementation; those remain for Day 4.
+
+**Issues Identified:**
+The public pages depend on the local/deployment database being configured. Screenshots, browser behavior, responsive widths, and invalid/missing-ID response behavior still need integration review.
+
+**Related Commit:**
+`dbc877d` — https://github.com/s4251498/wp/commit/dbc877d
 
 ---
 
