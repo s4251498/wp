@@ -205,6 +205,11 @@ img {
     object-fit: cover;
 }
 
+.hero-empty {
+    color: var(--background-white);
+    background: linear-gradient(135deg, var(--nav-blue), var(--primary-dark));
+}
+
 .hero-carousel .carousel-caption {
     background-color: rgba(15, 118, 110, 0.88);
     border-radius: 0.5rem;
@@ -360,12 +365,36 @@ img {
     opacity: 0.85;
 }
 
+.gallery-image-button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+}
+
+.gallery-image-button:focus-visible {
+    outline: 3px solid var(--primary-dark);
+    outline-offset: -3px;
+}
+
 .gallery-card .gallery-title {
     padding: 0.75rem 1rem;
     margin: 0;
     font-family: "Righteous", sans-serif;
     color: var(--primary-dark);
     background-color: var(--background-white);
+}
+
+.gallery-card .gallery-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.gallery-card .gallery-title a:hover,
+.gallery-card .gallery-title a:focus {
+    text-decoration: underline;
 }
 
 
@@ -376,6 +405,10 @@ img {
     border: 1px solid var(--border);
     border-radius: 0.75rem;
     padding: 2rem;
+}
+
+.search-form {
+    max-width: 46rem;
 }
 
 .details-image {

@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
      */
 
     const galleryImages = document.querySelectorAll(
-        '.gallery-image'
+        '.gallery-image-button'
     );
 
     const galleryModalImage = document.getElementById(
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
             image.addEventListener('click', function () {
 
                 const imageSource = this.dataset.image;
-                const imageTitle = this.dataset.title;
+                const imageTitle = this.dataset.title || 'Book';
 
                 galleryModalImage.src = imageSource;
                 galleryModalImage.alt =
@@ -169,23 +169,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (galleryModalLabel) {
                     galleryModalLabel.textContent =
                         imageTitle;
-                }
-
-            });
-
-            /*
-             * Allow keyboard users to open the image.
-             */
-            image.addEventListener('keydown', function (event) {
-
-                if (
-                    event.key === 'Enter' ||
-                    event.key === ' '
-                ) {
-
-                    event.preventDefault();
-                    this.click();
-
                 }
 
             });
