@@ -119,7 +119,7 @@ The interface carries forward the BookVerse palette and typography from the earl
 
 ## 7. Database Design
 
-Local checks used the supplied SQL in a temporary MariaDB 10.4.32 database. SDAMS reports the Jacob 5 database as `S4251498_159009`, and the official course handout gives host `talsprddb02.int.its.rmit.edu.au` with the student ID as the database username. Production connection and deployment remain unverified. `db_connect.inc` uses local defaults only for localhost and environment variables for deployment.
+Local checks used the supplied SQL in a temporary MariaDB 10.4.32 database. SDAMS reports the Jacob 5 database as `S4251498_159009`, and the official course handout gives host `talsprddb02.int.its.rmit.edu.au` with the student ID as the database username. Production connection and deployment are documented in sections 14–15 below. `db_connect.inc` uses local defaults only for localhost and environment variables for deployment.
 
 | Table | Important fields | Purpose |
 |---|---|---|
@@ -162,9 +162,9 @@ Registration requires username, valid email, password, and confirmation; phone, 
 
 ## 12. Uploads and Security
 
-Uploads are stored under `assets/images/covers/` with a random 32-character hexadecimal filename and accepted image extension. The original name is used only to read the extension. PHP verifies upload status, size, extension, and MIME type. Editing without a new file retains the current cover. Replaced/deleted files are removed only after checking that no book still references them. Missing or unsafe paths display the placeholder. The directory `.gitignore` keeps generated uploads out of Git while retaining its placeholder file; production write permissions must be set on the hosting server.
+Uploads are stored under `assets/images/covers/` with a random 32-character hexadecimal filename and accepted image extension. The original name is used only to read the extension. PHP verifies upload status, size, extension, and MIME type. Editing without a new file retains the current cover. Replaced/deleted files are removed only after checking that no book still references them. Missing or unsafe paths display the placeholder. The directory `.gitignore` keeps generated uploads out of Git while retaining its placeholder file; a live cover upload succeeded on Saturn, confirming the application could write an uploaded image there at the time of the check.
 
-Queries use prepared statements, output is escaped, inputs are validated server-side, sessions use HttpOnly/SameSite cookies, state-changing forms use CSRF tokens, and mutation queries check ownership. Detailed database errors go to the server log rather than the visitor. Deployment upload-directory permissions and HTTPS settings still need verification on Coreteaching.
+Queries use prepared statements, output is escaped, inputs are validated server-side, sessions use HttpOnly/SameSite cookies, state-changing forms use CSRF tokens, and mutation queries check ownership. Detailed database errors go to the server log rather than the visitor. A live cover upload succeeded on Saturn. The HTTPS site opened in MyDesktop Chrome; a full certificate/configuration audit was not performed.
 
 ## 13. Accessibility and Usability
 
@@ -198,7 +198,7 @@ Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in s
 | W3C HTML checker | Pass | Ten rendered states passed with zero errors/warnings: public pages, login/register, and authenticated add/edit forms. |
 | W3C CSS validator | Inconclusive | The W3C service returned `Reader used` for POST and HTTP 520 for GET; no CSS pass is claimed. |
 | Browser console audit | Pending | Not completed. |
-| Live deployment | Partial pass | On 1 November 2026, the protected Saturn diagnostic confirmed PHP 7.4.33, mysqli available, the private config readable by the Apache service account, and a successful Jacob 5 connection. The live homepage, Books list, book details, Gallery/modal, Register, and Log in pages rendered. Authenticated CRUD, account flows, file upload, and responsive browser checks remain unverified live. |
+| Live deployment | Partial pass | On 1 November 2026, the protected Saturn diagnostic confirmed PHP 7.4.33, mysqli available, the private config readable by the Apache service account, and a successful Jacob 5 connection. Live registration, login, logout, book creation, edit, cover upload, My Listings, search, and Sold filtering were also exercised. Delete, unauthorized cross-owner access, mobile widths, and console audit remain unverified. |
 
 ## 15. Deployment
 
@@ -207,12 +207,12 @@ Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in s
 | Website URL | `https://saturn.csit.rmit.edu.au/~s4251498/wp/a3/` (opened and verified in MyDesktop) |
 | Coreteaching host | `saturn.csit.rmit.edu.au` (official course server details) |
 | Coreteaching target folder | `~/public_html/wp/a3` (live app pages verified) |
-| Jacob 5 database name | `S4251498_159009` as shown in SDAMS; verify case and account access before use |
+| Jacob 5 database name | `S4251498_159009` as shown in SDAMS; successful connection confirmed by the protected diagnostic and live application operations. |
 | `.htaccess` | No custom AT3 file currently present |
 | Database config | `~/bookverse-db-config.php`, outside `public_html`; owner `s4251498` retains read/write, and a named ACL grants read-only access to the `apache` service account. Group and other users have no access. |
-| Upload permissions | Not yet verified live |
+| Upload permissions | A cover image upload through the live form succeeded; the saved image rendered in My Listings and search results. |
 
-The Jacob 5 connection was verified by the temporary protected diagnostic. The homepage, list, detail, gallery/modal, registration, and login routes rendered on Saturn. Existing sample records include missing cover files and at least one unavailable seller, which the UI handles with fallbacks. Live registration/login submissions, CRUD, logout/session behavior, search results, uploads, and upload-directory permissions still need verification. No production credentials are stored in this project. The temporary diagnostic endpoint is removed from Git after this deployment record; keep it removed from the server as well.
+The Jacob 5 connection was verified by the temporary protected diagnostic, which was removed from the repository and server after use. On Saturn, a disposable test account was registered, logged in, logged out, and logged in again. That account created listing ID 13, uploaded a cover, and edited the title and status; the edited listing and cover appeared in My Listings and a matching search returned one result. The test account (`bvtest20261101`) and listing remain in the live database. The listing has not been deleted. The tests confirmed owner controls were shown for that account's own listing, but did not attempt cross-owner URL manipulation or submit a delete. Existing sample records include missing cover files and at least one unavailable seller, which the UI handles with fallbacks. No production credentials are stored in this project.
 
 ## 16. Git and Development Process
 
@@ -226,7 +226,7 @@ AI helped inspect requirements, build and review shared PHP/auth/CRUD/browsing c
 
 ## 18. Known Limitations
 
-- Authenticated live account and CRUD flows, file uploads, upload permissions, responsive browser checks, and a full browser console audit remain outstanding. Basic live page rendering and the Jacob 5 connection have been verified on Saturn.
+- Live registration/login/logout, listing creation/editing, cover upload, search, Sold status filtering, and the Jacob 5 connection have been verified on Saturn. Live deletion, cross-owner access denial, mobile viewport checks, and a full browser console audit remain outstanding.
 - The supplied ZIP has no cover images. Existing database filenames that are missing locally use the placeholder; suitable real covers can be added through the upload form.
 - Exact comparison with the assessment screenshots, mobile/tablet browser checks, CSS validation (W3C endpoint failed), and a browser console audit remain outstanding.
 - The student ID, personal reflection, and live demonstration must be completed by the student.
