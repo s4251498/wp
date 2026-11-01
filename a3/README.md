@@ -8,7 +8,7 @@
 | Student name | Oliver Heberle |
 | Student ID | Not supplied in the project files |
 | GitHub repository | https://github.com/s4251498/wp |
-| Published branch | `main` (`c6f329a`) |
+| Published branch | `main` |
 | Development branch | `codex/at3-foundation` |
 | Deployed website | Not deployed / URL not supplied |
 

@@ -472,7 +472,7 @@ The assessment plan now records `main` as the published branch, the exact commit
 The live site, small-screen browser viewports, browser console, formal HTML/CSS validation, and exact screenshot comparison still require access or a usable validator/browser setup. The student must review and personalize the reflection before submission and complete the individual demonstration.
 
 **Related Commit:**
-This process record accompanies the current documentation update; the final documentation commit link will be recorded in a follow-up evidence edit.
+`f6c502e` — https://github.com/s4251498/wp/commit/f6c502e (published branch update and reflection draft). The brief follow-up evidence-link edit records this hash.
 
 ---
 
