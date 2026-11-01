@@ -13,11 +13,25 @@ if ($isLocalServer) {
     $dbPass = getenv('BOOKVERSE_DB_PASS') ?: '';
     $dbName = getenv('BOOKVERSE_DB_NAME') ?: 'bookverse';
 } else {
-    // Configure these values in the server environment; never commit credentials.
+    // Prefer server environment variables; keep fallback credentials outside public_html.
     $dbHost = getenv('BOOKVERSE_DB_HOST');
     $dbUser = getenv('BOOKVERSE_DB_USER');
     $dbPass = getenv('BOOKVERSE_DB_PASS');
     $dbName = getenv('BOOKVERSE_DB_NAME');
+
+    $privateConfigPath = dirname(__DIR__, 4) . '/bookverse-db-config.php';
+    if ((!$dbHost || !$dbUser || !$dbName) && is_readable($privateConfigPath)) {
+        $privateConfig = require $privateConfigPath;
+        if (is_array($privateConfig)) {
+            $dbHost = $dbHost ?: ($privateConfig['host'] ?? null);
+            $dbUser = $dbUser ?: ($privateConfig['user'] ?? null);
+            $dbPass = $dbPass ?: ($privateConfig['password'] ?? null);
+            $dbName = $dbName ?: ($privateConfig['database'] ?? null);
+            if (!getenv('BOOKVERSE_DB_PORT') && isset($privateConfig['port'])) {
+                putenv('BOOKVERSE_DB_PORT=' . (int) $privateConfig['port']);
+            }
+        }
+    }
 }
 
 try {
