@@ -112,6 +112,7 @@ function bv_store_cover_upload(array $file): ?string
         throw new RuntimeException('Use a JPG, JPEG, PNG, GIF, or WEBP image.');
     }
 
+    // Check the file contents as well as its name; extensions are user-controlled.
     $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
     $mimeType = $fileInfo ? finfo_file($fileInfo, $tmpName) : false;
     if ($fileInfo) {
@@ -125,6 +126,7 @@ function bv_store_cover_upload(array $file): ?string
     if (!is_dir($directory) || !is_writable($directory)) {
         throw new RuntimeException('Cover uploads are not available right now.');
     }
+    // Store a random name so user-supplied paths/names never become server paths.
     $generatedName = bin2hex(random_bytes(16)) . '.' . $extension;
     if (!move_uploaded_file($tmpName, $directory . DIRECTORY_SEPARATOR . $generatedName)) {
         throw new RuntimeException('The cover could not be saved. Please try again.');
@@ -142,6 +144,7 @@ function bv_delete_cover_if_unused(mysqli $conn, ?string $filename): bool
         return false;
     }
 
+    // Keep a shared cover while any remaining listing still references it.
     $stmt = mysqli_prepare($conn, 'SELECT COUNT(*) FROM books WHERE image_path = ?');
     mysqli_stmt_bind_param($stmt, 's', $filename);
     mysqli_stmt_execute($stmt);

@@ -12,6 +12,7 @@ if ($bookId === null) {
 
 require_once __DIR__ . '/includes/db_connect.inc';
 $ownerId = (int) $_SESSION['user_id'];
+// Scope the fetch by owner so changing the query-string ID cannot expose another user's form data.
 $stmt = mysqli_prepare(
     $conn,
     'SELECT book_id, title, author, genre, publication_year, isbn, description, book_condition, price, image_path, status FROM books WHERE book_id = ? AND user_id = ? LIMIT 1'
@@ -102,6 +103,7 @@ if ($isPost) {
         }
 
         if ($updateSaved) {
+            // Handle file cleanup after DB success so a cleanup failure cannot misreport the edit itself.
             $cleanupSucceeded = true;
             if ($newCover !== null && $book['image_path'] !== $newCover) {
                 try {

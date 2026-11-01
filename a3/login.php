@@ -20,6 +20,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     } else {
         try {
             require_once __DIR__ . '/includes/db_connect.inc';
+            // One generic failure message avoids revealing whether a username/email exists.
             $stmt = mysqli_prepare(
                 $conn,
                 'SELECT user_id, username, password FROM users WHERE username = ? OR email = ? LIMIT 1'

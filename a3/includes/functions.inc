@@ -37,12 +37,14 @@ function bv_post_string(array $source, string $key, bool $trim = true): string
     if (!isset($source[$key]) || !is_string($source[$key])) {
         return '';
     }
+    // Passwords pass trim=false so whitespace remains part of the secret.
     return $trim ? trim($source[$key]) : $source[$key];
 }
 
 function bv_login_user(int $userId, string $username): void
 {
     bv_start_session();
+    // Rotate the ID at authentication to prevent session fixation.
     session_regenerate_id(true);
     unset($_SESSION['csrf_token']);
     $_SESSION['user_id'] = $userId;
@@ -89,6 +91,7 @@ function bv_csrf_token(): string
 function bv_verify_csrf(?string $submittedToken): bool
 {
     bv_start_session();
+    // Constant-time comparison avoids leaking token-prefix matches.
     return is_string($submittedToken)
         && isset($_SESSION['csrf_token'])
         && hash_equals($_SESSION['csrf_token'], $submittedToken);

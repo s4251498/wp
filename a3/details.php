@@ -26,6 +26,7 @@ if ($loadError) {
     http_response_code(404);
 }
 $isOwner = $book !== null && bv_is_authenticated() && (int) $_SESSION['user_id'] === (int) $book['user_id'];
+// These controls are only a UI hint; edit.php and process_delete.php repeat the owner check.
 
 require_once __DIR__ . '/includes/header.inc';
 require_once __DIR__ . '/includes/nav.inc';

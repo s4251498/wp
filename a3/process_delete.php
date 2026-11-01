@@ -24,6 +24,7 @@ $imagePath = null;
 $found = false;
 $deletedRows = 0;
 try {
+    // Repeat the owner condition in both reads and the delete to enforce authorization server-side.
     $stmt = mysqli_prepare($conn, 'SELECT image_path FROM books WHERE book_id = ? AND user_id = ? LIMIT 1');
     mysqli_stmt_bind_param($stmt, 'ii', $bookId, $ownerId);
     mysqli_stmt_execute($stmt);
