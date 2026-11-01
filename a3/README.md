@@ -104,7 +104,7 @@ The live application loaded its pages and assets and passed the operations liste
 
 ## Git process
 
-AT3 is on the repository `main` branch. The overall Git repository currently has 79 commits; 36 commits touch `a3/`. Those commits span six actual dates in the repository history:
+AT3 is on the repository `main` branch. At this report update, the repository has 81 commits; 38 commits touch `a3/`. Those commits span six actual dates in the repository history:
 
 | Date | AT3 commits |
 |---|---:|
@@ -113,9 +113,9 @@ AT3 is on the repository `main` branch. The overall Git repository currently has
 | 18 October 2026 | 6 |
 | 21 October 2026 | 5 |
 | 28 October 2026 | 2 |
-| 1 November 2026 | 21 |
+| 1 November 2026 | 23 |
 
-For AT3-only commits, the largest date is `21 / 36 × 100 = 58.3%`, above the rubric's 50% target. Across the complete repository history, it is `21 / 79 × 100 = 26.6%`; assessment interpretation depends on whether the marker counts only AT3 commits or all project history. No dates were fabricated or rewritten. The Git history and process records should be reviewed with this limitation in mind.
+For AT3-only commits, the largest date is `23 / 38 × 100 = 60.5%`, above the rubric's 50% target. Across the complete repository history, it is `23 / 81 × 100 = 28.4%`; assessment interpretation depends on whether the marker counts only AT3 commits or all project history. No dates were fabricated or rewritten. The Git history and process records should be reviewed with this limitation in mind.
 
 ## AI use and process evidence
 
