@@ -3,12 +3,16 @@ require_once __DIR__ . '/book_helpers.inc';
 
 function bv_status_class(string $status): string
 {
-    return match ($status) {
-        'Available' => 'status-available',
-        'Reserved' => 'status-reserved',
-        'Sold' => 'status-sold',
-        default => '',
-    };
+    switch ($status) {
+        case 'Available':
+            return 'status-available';
+        case 'Reserved':
+            return 'status-reserved';
+        case 'Sold':
+            return 'status-sold';
+        default:
+            return '';
+    }
 }
 
 function bv_fetch_all_books(mysqli $conn, string $orderBy = 'title'): array
