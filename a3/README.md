@@ -198,7 +198,7 @@ Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in s
 | W3C HTML checker | Pass | Ten rendered states passed with zero errors/warnings: public pages, login/register, and authenticated add/edit forms. |
 | W3C CSS validator | Inconclusive | The W3C service returned `Reader used` for POST and HTTP 520 for GET; no CSS pass is claimed. |
 | Browser console audit | Pending | Not completed. |
-| Live deployment | Partial pass | On 1 November 2026, the protected Saturn diagnostic confirmed PHP 7.4.33, mysqli available, the private config readable by the Apache service account, and a successful Jacob 5 connection. Live registration, login, logout, book creation, edit, delete, cover upload, My Listings, search, and Sold filtering were exercised. Cross-owner access denial, mobile widths, and console audit remain unverified. |
+| Live deployment | Partial pass | On 1 November 2026, the protected Saturn diagnostic confirmed PHP 7.4.33, mysqli available, the private config readable by the Apache service account, and a successful Jacob 5 connection. Live registration, login, logout, anonymous edit-route protection, book creation, edit, delete, cover upload, My Listings, search, and Sold filtering were exercised. Cross-owner access denial, mobile widths, and console audit remain unverified. |
 
 ## 15. Deployment
 
@@ -226,7 +226,7 @@ AI helped inspect requirements, build and review shared PHP/auth/CRUD/browsing c
 
 ## 18. Known Limitations
 
-- Live registration/login/logout, listing creation/editing/deletion, cover upload, search, Sold status filtering, and the Jacob 5 connection have been verified on Saturn. Cross-owner access denial, mobile viewport checks, and a full browser console audit remain outstanding.
+- Live registration/login/logout, anonymous protection for the edit route, listing creation/editing/deletion, cover upload, search, Sold status filtering, and the Jacob 5 connection have been verified on Saturn. Cross-owner access denial, mobile viewport checks, and a full browser console audit remain outstanding.
 - The supplied ZIP has no cover images. Existing database filenames that are missing locally use the placeholder; suitable real covers can be added through the upload form.
 - Exact comparison with the assessment screenshots, mobile/tablet browser checks, CSS validation (W3C endpoint failed), and a browser console audit remain outstanding.
 - The student ID, personal reflection, and live demonstration must be completed by the student.
