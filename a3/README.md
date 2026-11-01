@@ -198,7 +198,7 @@ Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in s
 | W3C HTML checker | Pass | Ten rendered states passed with zero errors/warnings: public pages, login/register, and authenticated add/edit forms. |
 | W3C CSS validator | Inconclusive | The W3C service returned `Reader used` for POST and HTTP 520 for GET; no CSS pass is claimed. |
 | Browser console audit | Pending | Not completed. |
-| Live deployment | Partial pass | On 1 November 2026, the protected Saturn diagnostic confirmed PHP 7.4.33, mysqli available, the private config readable by the Apache service account, and a successful Jacob 5 connection. Live registration, login, logout, book creation, edit, cover upload, My Listings, search, and Sold filtering were also exercised. Delete, unauthorized cross-owner access, mobile widths, and console audit remain unverified. |
+| Live deployment | Partial pass | On 1 November 2026, the protected Saturn diagnostic confirmed PHP 7.4.33, mysqli available, the private config readable by the Apache service account, and a successful Jacob 5 connection. Live registration, login, logout, book creation, edit, delete, cover upload, My Listings, search, and Sold filtering were exercised. Cross-owner access denial, mobile widths, and console audit remain unverified. |
 
 ## 15. Deployment
 
@@ -212,7 +212,7 @@ Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in s
 | Database config | `~/bookverse-db-config.php`, outside `public_html`; owner `s4251498` retains read/write, and a named ACL grants read-only access to the `apache` service account. Group and other users have no access. |
 | Upload permissions | A cover image upload through the live form succeeded; the saved image rendered in My Listings and search results. |
 
-The Jacob 5 connection was verified by the temporary protected diagnostic, which was removed from the repository and server after use. On Saturn, a disposable test account was registered, logged in, logged out, and logged in again. That account created listing ID 13, uploaded a cover, and edited the title and status; the edited listing and cover appeared in My Listings and a matching search returned one result. The test account (`bvtest20261101`) and listing remain in the live database. The listing has not been deleted. The tests confirmed owner controls were shown for that account's own listing, but did not attempt cross-owner URL manipulation or submit a delete. Existing sample records include missing cover files and at least one unavailable seller, which the UI handles with fallbacks. No production credentials are stored in this project.
+The Jacob 5 connection was verified by the temporary protected diagnostic, which was removed from the repository and server after use. On Saturn, a disposable test account was registered, logged in, logged out, and logged in again. That account created listing ID 13, uploaded a cover, and edited the title and status; the edited listing and cover appeared in My Listings and a matching search returned one result. After the delete test, the site confirmed the listing was deleted and My Listings showed zero books. The test account (`bvtest20261101`) remains in the live database; listing ID 13 and its uploaded cover were removed. The test confirmed owner controls were shown for that account's own listing, but did not attempt cross-owner URL manipulation. Existing sample records include missing cover files and at least one unavailable seller, which the UI handles with fallbacks. No production credentials are stored in this project.
 
 ## 16. Git and Development Process
 
@@ -226,7 +226,7 @@ AI helped inspect requirements, build and review shared PHP/auth/CRUD/browsing c
 
 ## 18. Known Limitations
 
-- Live registration/login/logout, listing creation/editing, cover upload, search, Sold status filtering, and the Jacob 5 connection have been verified on Saturn. Live deletion, cross-owner access denial, mobile viewport checks, and a full browser console audit remain outstanding.
+- Live registration/login/logout, listing creation/editing/deletion, cover upload, search, Sold status filtering, and the Jacob 5 connection have been verified on Saturn. Cross-owner access denial, mobile viewport checks, and a full browser console audit remain outstanding.
 - The supplied ZIP has no cover images. Existing database filenames that are missing locally use the placeholder; suitable real covers can be added through the upload form.
 - Exact comparison with the assessment screenshots, mobile/tablet browser checks, CSS validation (W3C endpoint failed), and a browser console audit remain outstanding.
 - The student ID, personal reflection, and live demonstration must be completed by the student.
