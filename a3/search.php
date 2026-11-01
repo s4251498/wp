@@ -9,7 +9,7 @@ $queryTooLong = strlen($query) > 100;
 if ($query !== '' && !$queryTooLong) {
     try {
         $pattern = '%' . $query . '%';
-        $stmt = mysqli_prepare($conn, 'SELECT b.book_id, b.user_id, b.title, b.author, b.genre, b.publication_year, b.isbn, b.description, b.book_condition, b.price, b.image_path, b.status, b.created_at, u.username FROM books b INNER JOIN users u ON u.user_id = b.user_id WHERE b.title LIKE ? OR b.author LIKE ? OR b.genre LIKE ? OR b.isbn LIKE ? ORDER BY b.created_at DESC, b.book_id DESC LIMIT 50');
+        $stmt = mysqli_prepare($conn, 'SELECT b.book_id, b.user_id, b.title, b.author, b.genre, b.publication_year, b.isbn, b.description, b.book_condition, b.price, b.image_path, b.status, b.created_at, u.username FROM books b LEFT JOIN users u ON u.user_id = b.user_id WHERE b.title LIKE ? OR b.author LIKE ? OR b.genre LIKE ? OR b.isbn LIKE ? ORDER BY b.created_at DESC, b.book_id DESC LIMIT 50');
         mysqli_stmt_bind_param($stmt, 'ssss', $pattern, $pattern, $pattern, $pattern);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
@@ -22,6 +22,9 @@ if ($query !== '' && !$queryTooLong) {
         error_log('BookVerse search query failed: ' . $error->getMessage());
         $loadError = true;
     }
+}
+if ($loadError) {
+    http_response_code(503);
 }
 require_once __DIR__ . '/includes/header.inc';
 require_once __DIR__ . '/includes/nav.inc';

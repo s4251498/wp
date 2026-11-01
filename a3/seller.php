@@ -31,6 +31,11 @@ if ($sellerId !== null) {
         $loadError = true;
     }
 }
+if ($loadError) {
+    http_response_code(503);
+} elseif ($seller === null) {
+    http_response_code(404);
+}
 require_once __DIR__ . '/includes/header.inc';
 require_once __DIR__ . '/includes/nav.inc';
 ?>

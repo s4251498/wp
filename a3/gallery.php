@@ -10,6 +10,9 @@ try {
     error_log('BookVerse gallery query failed: ' . $error->getMessage());
     $loadError = true;
 }
+if ($loadError) {
+    http_response_code(503);
+}
 require_once __DIR__ . '/includes/header.inc';
 require_once __DIR__ . '/includes/nav.inc';
 ?>

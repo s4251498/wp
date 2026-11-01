@@ -11,6 +11,9 @@ try {
     error_log('BookVerse books page query failed: ' . $error->getMessage());
     $loadError = true;
 }
+if ($loadError) {
+    http_response_code(503);
+}
 $statuses = ['Available', 'Reserved', 'Sold'];
 
 require_once __DIR__ . '/includes/header.inc';
@@ -43,7 +46,7 @@ require_once __DIR__ . '/includes/nav.inc';
                             <tr data-status="<?= bv_escape($book['status']) ?>">
                                 <td><a href="details.php?id=<?= (int) $book['book_id'] ?>"><?= bv_escape($book['title']) ?></a></td>
                                 <td><?= bv_escape($book['author']) ?></td>
-                                <td><a href="seller.php?id=<?= (int) $book['user_id'] ?>"><?= bv_escape($book['username']) ?></a></td>
+                                <td><?php if ($book['user_id'] !== null && $book['username'] !== null): ?><a href="seller.php?id=<?= (int) $book['user_id'] ?>"><?= bv_escape($book['username']) ?></a><?php else: ?>Unavailable<?php endif; ?></td>
                                 <td>$<?= number_format((float) $book['price'], 2) ?></td>
                                 <td><span class="status-badge <?= bv_escape(bv_status_class($book['status'])) ?>"><?= bv_escape($book['status']) ?></span></td>
                                 <td><a class="btn btn-sm btn-outline-primary" href="details.php?id=<?= (int) $book['book_id'] ?>">View details</a></td>

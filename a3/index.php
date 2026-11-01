@@ -11,6 +11,9 @@ try {
     error_log('BookVerse home page query failed: ' . $error->getMessage());
     $loadError = true;
 }
+if ($loadError) {
+    http_response_code(503);
+}
 $latestBooks = $books;
 $slides = $books;
 

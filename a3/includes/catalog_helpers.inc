@@ -18,7 +18,7 @@ function bv_fetch_all_books(mysqli $conn, string $orderBy = 'title'): array
         'newest' => 'b.created_at DESC, b.book_id DESC',
     ];
     $order = $allowedOrder[$orderBy] ?? $allowedOrder['title'];
-    $sql = 'SELECT b.book_id, b.user_id, b.title, b.author, b.genre, b.publication_year, b.isbn, b.description, b.book_condition, b.price, b.image_path, b.status, b.created_at, u.username FROM books b INNER JOIN users u ON u.user_id = b.user_id ORDER BY ' . $order;
+    $sql = 'SELECT b.book_id, b.user_id, b.title, b.author, b.genre, b.publication_year, b.isbn, b.description, b.book_condition, b.price, b.image_path, b.status, b.created_at, u.username FROM books b LEFT JOIN users u ON u.user_id = b.user_id ORDER BY ' . $order;
     $result = mysqli_query($conn, $sql);
     $books = [];
     while ($row = mysqli_fetch_assoc($result)) {
@@ -31,7 +31,7 @@ function bv_fetch_all_books(mysqli $conn, string $orderBy = 'title'): array
 function bv_fetch_latest_books(mysqli $conn, int $limit = 4): array
 {
     $limit = max(1, min($limit, 12));
-    $stmt = mysqli_prepare($conn, 'SELECT b.book_id, b.user_id, b.title, b.author, b.genre, b.price, b.image_path, b.status, u.username FROM books b INNER JOIN users u ON u.user_id = b.user_id ORDER BY b.created_at DESC, b.book_id DESC LIMIT ?');
+    $stmt = mysqli_prepare($conn, 'SELECT b.book_id, b.user_id, b.title, b.author, b.genre, b.price, b.image_path, b.status, u.username FROM books b LEFT JOIN users u ON u.user_id = b.user_id ORDER BY b.created_at DESC, b.book_id DESC LIMIT ?');
     mysqli_stmt_bind_param($stmt, 'i', $limit);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);

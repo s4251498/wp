@@ -16,6 +16,10 @@ function bv_cover_src($filename): string
         || !preg_match('/\A[a-zA-Z0-9_-]+\.(jpg|jpeg|png|gif|webp)\z/i', $filename)) {
         return 'assets/images/cover-placeholder.svg';
     }
+    $coverPath = __DIR__ . '/../assets/images/covers/' . $filename;
+    if (is_link($coverPath) || !is_file($coverPath)) {
+        return 'assets/images/cover-placeholder.svg';
+    }
     return 'assets/images/covers/' . rawurlencode($filename);
 }
 

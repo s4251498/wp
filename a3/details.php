@@ -8,7 +8,7 @@ $loadError = false;
 if ($bookId !== null) {
     try {
         require_once __DIR__ . '/includes/db_connect.inc';
-        $stmt = mysqli_prepare($conn, 'SELECT b.book_id, b.user_id, b.title, b.author, b.genre, b.publication_year, b.isbn, b.description, b.book_condition, b.price, b.image_path, b.status, b.created_at, u.username FROM books b INNER JOIN users u ON u.user_id = b.user_id WHERE b.book_id = ? LIMIT 1');
+        $stmt = mysqli_prepare($conn, 'SELECT b.book_id, b.user_id, b.title, b.author, b.genre, b.publication_year, b.isbn, b.description, b.book_condition, b.price, b.image_path, b.status, b.created_at, u.username FROM books b LEFT JOIN users u ON u.user_id = b.user_id WHERE b.book_id = ? LIMIT 1');
         mysqli_stmt_bind_param($stmt, 'i', $bookId);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
@@ -20,6 +20,11 @@ if ($bookId !== null) {
         $loadError = true;
     }
 }
+if ($loadError) {
+    http_response_code(503);
+} elseif ($book === null) {
+    http_response_code(404);
+}
 $isOwner = $book !== null && bv_is_authenticated() && (int) $_SESSION['user_id'] === (int) $book['user_id'];
 
 require_once __DIR__ . '/includes/header.inc';
@@ -27,7 +32,7 @@ require_once __DIR__ . '/includes/nav.inc';
 ?>
 <main class="container py-5">
     <?php if ($book): ?>
-        <header class="page-header text-center"><h1>Book details</h1><p class="lead">Listing shared by <a href="seller.php?id=<?= (int) $book['user_id'] ?>"><?= bv_escape($book['username']) ?></a>.</p></header>
+        <header class="page-header text-center"><h1>Book details</h1><p class="lead">Listing shared by <?php if ($book['user_id'] !== null && $book['username'] !== null): ?><a href="seller.php?id=<?= (int) $book['user_id'] ?>"><?= bv_escape($book['username']) ?></a><?php else: ?>an unavailable seller<?php endif; ?>.</p></header>
         <section class="details-card">
             <div class="row g-4 align-items-start">
                 <div class="col-12 col-md-5 text-center"><img class="details-image" src="<?= bv_escape(bv_cover_src($book['image_path'])) ?>" alt="<?= bv_escape($book['title']) ?> cover"></div>
@@ -41,7 +46,7 @@ require_once __DIR__ . '/includes/nav.inc';
                         <dt class="col-sm-4 detail-label">Condition</dt><dd class="col-sm-8 detail-value"><?= bv_escape($book['book_condition']) ?></dd>
                         <dt class="col-sm-4 detail-label">Price</dt><dd class="col-sm-8 detail-value">$<?= number_format((float) $book['price'], 2) ?></dd>
                         <dt class="col-sm-4 detail-label">Status</dt><dd class="col-sm-8 detail-value"><span class="status-badge <?= bv_escape(bv_status_class($book['status'])) ?>"><?= bv_escape($book['status']) ?></span></dd>
-                        <dt class="col-sm-4 detail-label">Seller</dt><dd class="col-sm-8 detail-value"><a href="seller.php?id=<?= (int) $book['user_id'] ?>"><?= bv_escape($book['username']) ?></a></dd>
+                        <dt class="col-sm-4 detail-label">Seller</dt><dd class="col-sm-8 detail-value"><?php if ($book['user_id'] !== null && $book['username'] !== null): ?><a href="seller.php?id=<?= (int) $book['user_id'] ?>"><?= bv_escape($book['username']) ?></a><?php else: ?>Unavailable<?php endif; ?></dd>
                     </dl>
                     <hr><h3 class="h5">Description</h3><p><?= nl2br(bv_escape($book['description'])) ?></p>
                     <div class="d-flex flex-wrap gap-2 mt-4">
