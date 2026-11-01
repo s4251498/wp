@@ -476,6 +476,40 @@ The live site, small-screen browser viewports, browser console, formal HTML/CSS 
 
 ---
 
+## AI Task 8
+
+**Date:**
+01/11/2026
+
+**Task Description:**
+Continue the live Coreteaching deployment attempt using the official current-access instructions, verify the correct server, and run available local checks while deployment is in progress.
+
+**Tool Used:**
+ChatGPT / Codex
+
+**Prompt / Input:**
+The user asked to continue deployment without stopping at the first error, check course announcements for the worldwide PHP server issue, verify the correct connection details, and keep progressing through remaining assessment checks if a genuine access blocker remained.
+
+**AI Output Summary:**
+The Canvas announcement dated 26 October states that developer access from outside RMIT was disabled while a worldwide PHP vulnerability was being resolved; students must connect through RMIT MyDesktop using PuTTY or Tera Term. The official downloaded Coreteaching handout identifies Saturn as `saturn.csit.rmit.edu.au` and confirms the student-number login. The earlier error screenshot showed a mistyped hostname. After correcting the field, PuTTY connected to Saturn's internal host and reached its password prompt. The SSH host key was offered only for a one-time connection. The current browser-computer bridge cannot securely pass the password from the local credential file into the Citrix terminal, so no password has been submitted and deployment changes have not been made.
+
+**What You Accepted:**
+Follow the official MyDesktop route, use the verified Saturn host and Jacob 5 instructions, do not publish or expose credentials, and do not report deployment as successful until live verification is complete.
+
+**What You Changed:**
+Updated the README deployment status with the official MyDesktop requirement, expected course paths, SDAMS database name, and the authenticated-access state. No application code or production database was changed.
+
+**Validation Performed:**
+All 12 `.php` files and 7 `.inc` files passed XAMPP PHP 8.0.30 syntax lint. `node --check a3/assets/js/scripts.js` passed and `git diff --check` passed before the documentation update. PuTTY visibly connected to the Saturn internal host and reached the password prompt; this does not establish successful authentication, repository access, or deployment.
+
+**Issues Identified:**
+The credential can be read from the local file, but the remote Citrix terminal does not accept the local clipboard through the available browser input bridge. A user must privately enter the RMIT password at the open PuTTY prompt, then tell Codex when authentication has completed. Remaining checks include inspecting server Git state, deploying the correct `main` checkout, safely migrating the existing Jacob 5 schema, configuring private PHP connection settings, setting required paths/permissions, and testing all live features and assets. Formal HTML/CSS validation, small-screen checks, and the browser console audit also remain outstanding.
+
+**Related Commit:**
+To be linked after committing this truthful deployment-progress entry.
+
+---
+
 # 📌 Final Reflection (End of Assessment)
 
 > **AI-assisted draft for student review:** This is based on the recorded project work and checks. Edit it so it accurately reflects your own learning and experience before submitting.

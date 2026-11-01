@@ -98,7 +98,7 @@ a3/
 | Google Fonts / Material Icons | Shared visual typography and interface icons loaded by `header.inc`. |
 | Git/GitHub | Incremental commits on `codex/at3-foundation`; evidence records link work to commits. |
 | XAMPP | Local PHP 8.0.30 and isolated MariaDB 10.4.32 checks. |
-| Coreteaching / Jacob 5 | Deployment targets required by the assessment; no deployment configuration or access was supplied, so live use is pending. |
+| Coreteaching / Jacob 5 | Deployment is pending. Course instructions require connecting through RMIT MyDesktop because direct access from outside RMIT is disabled during the response to a PHP vulnerability. |
 | AI tools | ChatGPT/Codex assisted implementation and review; detailed prompts and adaptations are in `process-evidence.md`. |
 
 ## 6. Design and Required Features
@@ -119,7 +119,7 @@ The interface carries forward the BookVerse palette and typography from the earl
 
 ## 7. Database Design
 
-Local checks used the supplied SQL in a temporary MariaDB 10.4.32 database. The live Jacob 5 database name and credentials are not available, so production connection and deployment remain unverified. `db_connect.inc` uses local defaults only for localhost and environment variables for deployment.
+Local checks used the supplied SQL in a temporary MariaDB 10.4.32 database. SDAMS reports the Jacob 5 database as `S4251498_159009`, and the official course handout gives host `talsprddb02.int.its.rmit.edu.au` with the student ID as the database username. Production connection and deployment remain unverified. `db_connect.inc` uses local defaults only for localhost and environment variables for deployment.
 
 | Table | Important fields | Purpose |
 |---|---|---|
@@ -193,19 +193,20 @@ Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in s
 | Responsive phone/tablet widths | Pending | The current browser session did not expose a viewport override. Responsive CSS is present but needs manual device-width review. |
 | HTML/CSS standards validators | Pending | Not run. |
 | Browser console audit | Pending | Not completed. |
-| Live deployment | Pending | No deployment URL/access/configuration was provided. |
+| Live deployment | Pending | Course announcements require MyDesktop access during the worldwide PHP vulnerability response. PuTTY connected to Saturn and reached its login prompt; authentication, upload, Jacob 5 schema migration, app-level live testing, and static asset checks remain outstanding. |
 
 ## 15. Deployment
 
 | Item | Details |
 |---|---|
-| Website URL | Not deployed / not supplied |
-| Jacob 5 database name | Not supplied |
-| Deployment folder | Not supplied |
+| Website URL | Expected from the official course path pattern: `https://saturn.csit.rmit.edu.au/~s4251498/wp/a3/`; not yet verified live |
+| Coreteaching host | `saturn.csit.rmit.edu.au` (official course server details) |
+| Coreteaching target folder | `~/public_html/wp/a3` after cloning/updating the `wp` repository, subject to checking the actual server checkout |
+| Jacob 5 database name | `S4251498_159009` as shown in SDAMS; verify case and account access before use |
 | `.htaccess` | No custom AT3 file currently present |
 | Upload permissions | Must be checked on the deployment host |
 
-Live authentication, database, paths, sessions, and upload permissions must be checked after the actual hosting details are available. Configure `BOOKVERSE_DB_HOST`, `BOOKVERSE_DB_USER`, `BOOKVERSE_DB_PASS`, `BOOKVERSE_DB_NAME`, and optionally `BOOKVERSE_DB_PORT` in the hosting environment. No production credentials are stored in this project.
+Live authentication, database, paths, sessions, and upload permissions remain unverified. The current authorized route is through MyDesktop/PuTTY; the app reached the Saturn authentication prompt, but the credential has not been submitted through the remote input bridge. Configure `BOOKVERSE_DB_HOST`, `BOOKVERSE_DB_USER`, `BOOKVERSE_DB_PASS`, `BOOKVERSE_DB_NAME`, and optionally `BOOKVERSE_DB_PORT` in a server-side environment/private configuration. No production credentials are stored in this project.
 
 ## 16. Git and Development Process
 
@@ -213,13 +214,13 @@ Work is organized into four planned stages, with dated implementation days on 18
 
 ## 17. AI Use and Process Evidence
 
-AI helped inspect requirements, build and review shared PHP/auth/CRUD/browsing code, and identify integration issues. The process log contains six AI task records and seven debugging records with verification limits recorded. The student must personally review this code, complete the final reflection, and ensure they can explain each part before attesting to the assessment declaration.
+AI helped inspect requirements, build and review shared PHP/auth/CRUD/browsing code, and identify integration issues. The process log contains eight AI task records and seven debugging records with verification limits recorded. The student must personally review this code, complete the final reflection, and ensure they can explain each part before attesting to the assessment declaration.
 
 `demo-notes.md` contains a rehearsal walkthrough for the later individual demonstration. The 25-mark demonstration has not yet occurred and is not represented as completed work.
 
 ## 18. Known Limitations
 
-- The project has not been deployed; Coreteaching/Jacob 5 credentials, database name, URL, path, and permissions are not available.
+- The project has not been deployed or live-tested. The expected Coreteaching path, course server hostname, and Jacob 5 database name are documented, but authentication, account access, actual remote checkout state, schema compatibility, and live URL response still need verification.
 - The supplied ZIP has no cover images. Existing database filenames that are missing locally use the placeholder; suitable real covers can be added through the upload form.
 - Exact comparison with the assessment screenshots, mobile/tablet browser checks, formal HTML/CSS validation, and a browser console audit remain outstanding.
 - The student ID, personal reflection, and live demonstration must be completed by the student.
