@@ -11,7 +11,7 @@ You must maintain this file throughout development.
 ## General Instructions
 - Record entries as you work (not at the end)
 - Be honest and specific
-- Link to commits.Each debugging record must include at least one related GitHub commit 
+- Link to commits. Each debugging record must include at least one related GitHub commit
 (using commit hash and URL).
 - Superficial or fabricated entries will not receive marks
 
@@ -21,62 +21,62 @@ You must maintain this file throughout development.
 
 ## Bug 1
 
-**Date Identified:**  
+**Date Identified:**
 21/10/2026
 
-**Date Fixed:**  
+**Date Fixed:**
 21/10/2026
 
-**File:**  
+**File:**
 `includes/functions.inc`, `register.php`, `login.php`
 
 **Related Commit:**
 `29458c7` — https://github.com/s4251498/wp/commit/29458c7
 
-**Symptom:**  
+**Symptom:**
 A generic POST-string helper trimmed password values, so leading and trailing spaces were silently removed before hashing and verification.
 
-**Steps to Reproduce:**  
+**Steps to Reproduce:**
 Register with a password that intentionally begins or ends with a space, then inspect the registration and login code paths. The same generic helper changed the submitted secret on both paths.
 
-**Root Cause:**  
+**Root Cause:**
 The helper treated passwords like ordinary text fields and normalized them with `trim()`.
 
-**Fix:**  
+**Fix:**
 Added an optional trim flag to `bv_post_string()` and read password/confirmation fields without trimming.
 
-**Verification:**  
+**Verification:**
 Registered an account with a leading/trailing-space password against the isolated test database; login with the exact password succeeded and the trimmed variant failed. Confirmed the stored value is a 60-character password hash, not plaintext.
 
 ---
 
 ## Bug 2
 
-**Date Identified:**  
+**Date Identified:**
 21/10/2026
 
-**Date Fixed:**  
+**Date Fixed:**
 21/10/2026
 
-**File:**  
+**File:**
 `edit.php`
 
-**Related Commit:**  
+**Related Commit:**
 `f2bc85a` — https://github.com/s4251498/wp/commit/f2bc85a
 
-**Symptom:**  
+**Symptom:**
 The initial edit-handler error boundary could report that saving failed when the database update had already succeeded but cleanup of the replaced image then failed.
 
-**Steps to Reproduce:**  
+**Steps to Reproduce:**
 Submit a valid edit with a new cover and make removal of the old cover fail after the update. The earlier control flow would enter the general save-error handler after the record was already updated.
 
-**Root Cause:**  
+**Root Cause:**
 Database persistence and post-update file cleanup were handled inside the same `try`/`catch` block.
 
-**Fix:**  
+**Fix:**
 Track whether the update succeeded and handle old-cover cleanup afterward, reporting cleanup failure as a warning while preserving the successful update result.
 
-**Verification:**  
+**Verification:**
 Reviewed the two control-flow paths: update errors remain form errors; cleanup errors after a successful update are logged and produce a warning flash. Runtime database/filesystem fault injection remains pending.
 
 ---
@@ -139,7 +139,100 @@ The gallery markup was changed from a directly activated image to a native butto
 Updated the script to bind to `.gallery-image-button`, where the modal data is stored. Native button keyboard activation now supplies keyboard access without a duplicate custom key handler.
 
 **Verification:**
-Compared the trigger selector and data attributes between the PHP markup and JavaScript. This is a static code review; browser interaction testing is still pending for Day 4.
+Compared the trigger selector and data attributes, then opened a gallery cover in the local browser and confirmed the modal title and image alt text updated to the selected book.
+
+---
+
+## Bug 5
+
+**Date Identified:**
+01/11/2026
+
+**Date Fixed:**
+01/11/2026
+
+**File:**
+`includes/book_helpers.inc`
+
+**Related Commit:**
+`b869224` — https://github.com/s4251498/wp/commit/b869224
+
+**Symptom:**
+Existing database rows referenced cover filenames such as `1.png` that were not included in the supplied project assets, so the browser displayed broken-image icons.
+
+**Steps to Reproduce:**
+Open a seeded listing detail page or homepage while its stored cover file is absent from `assets/images/covers/`.
+
+**Root Cause:**
+The cover helper validated the filename but assumed that a file with that name existed on disk.
+
+**Fix:**
+Require a regular, non-symlink file to exist before returning its URL; otherwise return `cover-placeholder.svg`.
+
+**Verification:**
+Observed the broken cover in the browser before the change, reloaded after the change, and confirmed the placeholder rendered. Confirmed the placeholder asset returned HTTP 200.
+
+---
+
+## Bug 6
+
+**Date Identified:**
+01/11/2026
+
+**Date Fixed:**
+01/11/2026
+
+**File:**
+`details.php`, `seller.php`, `index.php`, `books.php`, `gallery.php`, `search.php`
+
+**Related Commit:**
+`b869224` — https://github.com/s4251498/wp/commit/b869224
+
+**Symptom:**
+Invalid or missing detail/seller identifiers displayed a not-found message but returned HTTP 200, which misreported the result to browsers and clients.
+
+**Steps to Reproduce:**
+Request `details.php?id=abc`, a non-existent book ID, or an unknown seller ID and inspect the response status.
+
+**Root Cause:**
+The pages rendered an error message without setting an appropriate HTTP response status.
+
+**Fix:**
+Return HTTP 404 for invalid/missing book and seller records, and HTTP 503 when a page's database read fails.
+
+**Verification:**
+Local HTTP checks returned 404 for invalid/missing book IDs and unknown sellers; public valid pages continued returning 200. Database-outage 503 behavior was reviewed in code but not fault-injected.
+
+---
+
+## Bug 7
+
+**Date Identified:**
+01/11/2026
+
+**Date Fixed:**
+01/11/2026
+
+**File:**
+`includes/catalog_helpers.inc`, `books.php`, `details.php`, `search.php`
+
+**Related Commit:**
+`b869224` — https://github.com/s4251498/wp/commit/b869224
+
+**Symptom:**
+An inner join to `users` would hide a `books` row whose nullable `user_id` has no matching seller.
+
+**Steps to Reproduce:**
+Temporarily set a test book's `user_id` to NULL and request the collection and that book's detail page.
+
+**Root Cause:**
+The book query required every listing to match a user, although the supplied schema permits a null owner.
+
+**Fix:**
+Use a left join for public book reads and show an unavailable-seller label when no seller record exists.
+
+**Verification:**
+Temporarily set a local test row's owner to NULL; it remained visible on the collection and details page showed the fallback label. Restored the original owner immediately afterward.
 
 ---
 
@@ -147,31 +240,31 @@ Compared the trigger selector and data attributes between the PHP markup and Jav
 
 ## AI Task 1
 
-**Date:**  
+**Date:**
 18/10/2026
 
-**Task Description:**  
+**Task Description:**
 Inspect the supplied AT3 assessment materials and the existing `wp` repository, then prepare a rubric traceability matrix and a four-stage work plan before implementation.
 
-**Tool Used:**  
+**Tool Used:**
 ChatGPT / Codex
 
-**Prompt / Input:**  
+**Prompt / Input:**
 I supplied the AT3 project brief and asked Codex to inspect the starter materials before changes. I then identified `https://github.com/s4251498/wp` as the actual repository, explained that AT1 and AT2 live in their respective directories, clarified that the remaining 25 marks are for the later demonstration, and asked for four stages over four days with no more than half the total work on one day.
 
-**AI Output Summary:**  
+**AI Output Summary:**
 Codex inspected the assessment DOCX and SQL, cloned and inspected the repository, found that AT3 currently has only its documentation templates and asset placeholders, calculated the existing repository commit-date distribution, and wrote `a3/assessment-plan.md` with a requirement matrix, test plan, risks, and four approximately equal work stages.
 
-**What You Accepted:**  
+**What You Accepted:**
 Use the existing repository and keep all AT3 work in `a3/`; treat the official DOCX and SQL as requirements sources; keep untested work marked pending; divide future effort across four actual workdays; preserve authentic dates and commits.
 
-**What You Changed:**  
+**What You Changed:**
 No application code was generated in this planning session. The plan records the baseline and distinguishes project/process criteria (120 marks) from the later demonstration (25 marks). It also flags the exposed AT2 database credential without copying it into AT3.
 
-**Validation Performed:**  
+**Validation Performed:**
 Compared the repository tree and commit log with the checked-out repository, read the official assessment DOCX and `bookverse.sql`, checked the new plan for whitespace errors, and confirmed that all implementation/test statuses remain pending. This validates the planning artifact only; no application behavior has been tested.
 
-**Issues Identified:**  
+**Issues Identified:**
 The supplied HTML grading report has conflicting naming and scoring descriptions and is not a trustworthy implementation/test record. The repository's existing AT2 database connection contains a committed live credential; the account owner should rotate it. No credential value is reproduced here.
 
 **Related Commit:**
@@ -181,31 +274,31 @@ The supplied HTML grading report has conflicting naming and scoring descriptions
 
 ## AI Task 2
 
-**Date:**  
+**Date:**
 18/10/2026
 
-**Task Description:**  
+**Task Description:**
 Create the initial AT3 shared PHP infrastructure and carry forward the established design and JavaScript patterns without copying the AT2 database credential.
 
-**Tool Used:**  
+**Tool Used:**
 ChatGPT / Codex
 
-**Prompt / Input:**  
+**Prompt / Input:**
 The assessment brief requires MySQLi, secure sessions and flash messages, reusable header/navigation/footer includes, a single CSS and JavaScript file, prepared statements for later queries, and protection of production credentials. The user asked to start work in the existing `a3/` directory and keep the four-day work plan balanced.
 
-**AI Output Summary:**  
+**AI Output Summary:**
 Codex added environment-based database configuration, reusable session/escaping/flash/CSRF/access helpers, shared page includes, an AT2-derived stylesheet and JavaScript foundation, and a four-stage project plan. It kept the Jacob 5 credential out of the new files.
 
-**What You Accepted:**  
+**What You Accepted:**
 Keep the required procedural MySQLi connection; default local settings only on localhost; require server environment variables for non-local database credentials; escape shared output; use session-backed flash messages; make the logout control a CSRF-token POST form; reuse the existing BookVerse visual foundation.
 
-**What You Changed:**  
+**What You Changed:**
 The helper initially used PHP's `never` return type. After reviewing the AT2 history's older-server compatibility fix, it was removed to avoid requiring PHP 8.1. The live database settings remain environment variables because no deployment credentials were provided.
 
-**Validation Performed:**  
+**Validation Performed:**
 `node --check a3/assets/js/scripts.js` passed and the connection file reads environment configuration without an embedded password. At the time, PHP was not found on PATH; later that day I located the XAMPP PHP 8.0.30 runtime and ran the checks recorded below.
 
-**Issues Identified:**  
+**Issues Identified:**
 PHP was initially not found on PATH, but the XAMPP runtime was later located. The copied JavaScript features still need browser testing when their pages are implemented. No live deployment credential or local database setup was invented.
 
 **Related Commit:**
@@ -315,12 +408,46 @@ The public pages depend on the local/deployment database being configured. Scree
 
 ---
 
+## AI Task 6
+
+**Date:**
+01/11/2026
+
+**Task Description:**
+Integrate the six browsing pages, correct issues found during local checks, complete rubric/process documentation, and prepare a demonstration walkthrough.
+
+**Tool Used:**
+ChatGPT / Codex
+
+**Prompt / Input:**
+The user asked Codex to complete Day 4 of the four-day plan. The plan calls for integration checks, bug fixes, README/process-evidence completion, deployment-state reporting, and demonstration preparation.
+
+**AI Output Summary:**
+Linted current PHP files, checked JavaScript syntax, exercised all public routes against the isolated supplied schema, and used a local browser to check status filtering, keyword search, gallery modal behavior, login navigation, and owner controls. Integration review found missing cover files, incorrect error response codes, and the nullable owner join case; the code was updated and rechecked. The README and demo rehearsal outline were completed with unavailable deployment/student information clearly identified.
+
+**What You Accepted:**
+Keep deployment and personal/student-only details marked unavailable when they were not provided; document the actual local checks and leave unrun device-width/standards/deployment checks pending.
+
+**What You Changed:**
+The missing-cover fallback now checks disk before returning a cover URL, invalid book/seller IDs return 404, database read errors return 503, and public catalog reads preserve nullable-owner books with an unavailable-seller label. Added short comments at security and cleanup boundaries to explain the reason for the checks without narrating obvious code.
+
+**Validation Performed:**
+All current PHP/INC files passed PHP 8.0.30 lint; `node --check` and `git diff --check` passed. Local HTTP checks returned 200 for valid public routes, 404 for invalid/missing details and seller IDs, and 303 for anonymous add/edit requests. Browser checks confirmed one visible Sold row after filtering, a Dune search result, the selected gallery image/title in the modal, owner-only controls and delete-confirmation modal, login/logout navigation, and placeholder display for absent cover files. A temporary test account was removed and the book owner value restored. Formal HTML/CSS validation, phone/tablet viewport checks, console audit, and live deployment checks remain pending.
+
+**Issues Identified:**
+No deployment credentials, database name, deployment folder, or live URL are available. The student must supply their ID, complete their own reflection, personally review/explain the code, verify the deployed site, and rehearse the individual demonstration.
+
+**Related Commit:**
+`b869224` — https://github.com/s4251498/wp/commit/b869224; `2d09a21` — https://github.com/s4251498/wp/commit/2d09a21.
+
+---
+
 # 📌 Final Reflection (End of Assessment)
 
-**What AI was most useful for:**  
+**What AI was most useful for:**
 
-**Where AI was incorrect or misleading:**  
+**Where AI was incorrect or misleading:**
 
-**What you learned about debugging:**  
+**What you learned about debugging:**
 
-**How your approach changed over time:**  
+**How your approach changed over time:**
