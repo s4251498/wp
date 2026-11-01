@@ -100,11 +100,11 @@ Live pages and feature flows were checked in MyDesktop Chrome because the Saturn
 
 The live URL is `https://saturn.csit.rmit.edu.au/~s4251498/wp/a3/`. The target is Saturn at `~/public_html/wp/a3`; the account-specific database config is kept at `~/bookverse-db-config.php`, outside the public web directory. The production PHP runtime was 7.4.33 with MySQLi. A protected diagnostic confirmed the config was readable by Apache and the Jacob 5 database connection succeeded; the temporary diagnostic endpoint was removed from Git and the server after verification.
 
-The live application loaded its pages and assets and passed the operations listed above. Live cross-owner manipulation, mobile/tablet viewports, and a console audit remain unverified. The official Canvas `Adding .htaccess` guide and `htaccess` template were reviewed. The template is included at `deployment/public_html/.htaccess`, with the placeholder replaced by the RMIT login `s4251498@RMIT.INTERNAL`; its supplied staff-access rule is unchanged. The guide requires the file to be placed at `~/public_html/.htaccess`, not in `a3/`. This prepared file has not yet been installed or retested on Saturn.
+The live application loaded its pages and assets and passed the operations listed above. Live cross-owner manipulation, mobile/tablet viewports, and a console audit remain unverified. The official Canvas `Adding .htaccess` guide and `htaccess` template were reviewed. The template is included at `deployment/public_html/.htaccess`, with the placeholder replaced by the RMIT login `s4251498@RMIT.INTERNAL`; its supplied staff-access rule is unchanged. The guide requires the file to be placed at `~/public_html/.htaccess`, not in `a3/`. The user reported that they installed it there on 1 November; access-control behavior and staff access have not yet been independently retested.
 
 ## Git process
 
-AT3 is on the repository `main` branch. At this report update, the repository has 81 commits; 38 commits touch `a3/`. Those commits span six actual dates in the repository history:
+AT3 is on the repository `main` branch. At this report update, the repository has 82 commits; 39 commits touch `a3/`. Those commits span six actual dates in the repository history:
 
 | Date | AT3 commits |
 |---|---:|
@@ -113,9 +113,9 @@ AT3 is on the repository `main` branch. At this report update, the repository ha
 | 18 October 2026 | 6 |
 | 21 October 2026 | 5 |
 | 28 October 2026 | 2 |
-| 1 November 2026 | 23 |
+| 1 November 2026 | 24 |
 
-For AT3-only commits, the largest date is `23 / 38 × 100 = 60.5%`, above the rubric's 50% target. Across the complete repository history, it is `23 / 81 × 100 = 28.4%`; assessment interpretation depends on whether the marker counts only AT3 commits or all project history. No dates were fabricated or rewritten. The Git history and process records should be reviewed with this limitation in mind.
+For AT3-only commits, the largest date is `24 / 39 × 100 = 61.5%`, above the rubric's 50% target. Across the complete repository history, it is `24 / 82 × 100 = 29.3%`; assessment interpretation depends on whether the marker counts only AT3 commits or all project history. No dates were fabricated or rewritten. The Git history and process records should be reviewed with this limitation in mind.
 
 ## AI use and process evidence
 
@@ -127,4 +127,4 @@ AI assistance was used for planning, implementation review, debugging, testing, 
 - Phone/tablet layout, live console errors, CSS validation, and exact comparison with all supplied screenshots remain unverified or inconclusive.
 - The account `bvtest20261101` remains on Jacob 5, but its test listing and uploaded cover have been removed.
 - The README/process reflection needs the student's personal review and personalization. The one-on-one demonstration has not taken place; see `demo-notes.md`.
-- Install `deployment/public_html/.htaccess` as `~/public_html/.htaccess` following the Canvas guide, then test the live site in MyDesktop and verify the authorized RMIT login and staff access still work.
+- Verify the reported `~/public_html/.htaccess` installation on Saturn, including the authorized RMIT login and staff access rules.
