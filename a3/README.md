@@ -87,7 +87,7 @@ For local development, import the supplied SQL into a disposable MariaDB/MySQL i
 | JavaScript syntax | Pass: `node --check a3/assets/js/scripts.js`. |
 | Whitespace | Pass: `git diff --check`. |
 | Local database and routes | Pass for the documented isolated MariaDB sandbox: valid public routes and assets returned 200; invalid book/seller IDs returned 404; anonymous protected routes redirected to login. |
-| Local interactions | Pass for exercised registration, hashing/login/logout, CRUD, uploads, ownership checks, CSRF/method checks, search, status filters, gallery modal, and missing-cover fallback. |
+| Local interactions | Pass for exercised registration, hashing/login/logout, CRUD, uploads, ownership checks, CSRF/method checks, search, status filters, gallery modal, and missing-cover fallback. On 1 November, a disposable account also failed to edit or delete another user's sample listing in the isolated verification database; the listing remained and the test account was removed. |
 | HTML validation | Pass: ten rendered states passed the W3C HTML checker with zero errors or warnings. |
 | CSS validation | Inconclusive: the W3C service returned `Reader used` for POST and HTTP 520 for GET. No CSS pass is claimed. |
 | Live Saturn/Jacob 5 | Pass for connection and the exercised site routes, registration/login/logout, create/edit/delete, cover upload, search, Sold filter, and anonymous edit-route protection. Listing 13 was deleted after the test and My Listings showed zero books. |
@@ -104,16 +104,18 @@ The live application loaded its pages and assets and passed the operations liste
 
 ## Git process
 
-AT3 is on the repository `main` branch. The overall Git repository currently has 79 commits; 34 commits touch `a3/`. AT3 commits are dated across four real work dates:
+AT3 is on the repository `main` branch. The overall Git repository currently has 79 commits; 36 commits touch `a3/`. Those commits span six actual dates in the repository history:
 
 | Date | AT3 commits |
 |---|---:|
+| 27 May 2026 | 1 |
+| 14 July 2026 | 1 |
 | 18 October 2026 | 6 |
 | 21 October 2026 | 5 |
 | 28 October 2026 | 2 |
 | 1 November 2026 | 21 |
 
-For AT3-only commits, the largest date is `21 / 34 × 100 = 61.8%`, above the rubric's 50% target. Across the complete repository history, it is `21 / 79 × 100 = 26.6%`; assessment interpretation depends on whether the marker counts only AT3 commits or all project history. No dates were fabricated or rewritten. The Git history and process records should be reviewed with this limitation in mind.
+For AT3-only commits, the largest date is `21 / 36 × 100 = 58.3%`, above the rubric's 50% target. Across the complete repository history, it is `21 / 79 × 100 = 26.6%`; assessment interpretation depends on whether the marker counts only AT3 commits or all project history. No dates were fabricated or rewritten. The Git history and process records should be reviewed with this limitation in mind.
 
 ## AI use and process evidence
 
