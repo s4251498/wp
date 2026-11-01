@@ -1,232 +1,128 @@
 # COSC2446 Web Programming — Assessment 3
-# BookVerse Online Bookstore Platform
 
-## Student Details
+## BookVerse Online Bookstore Platform
+
+## Student and deployment details
 
 | Item | Details |
 |---|---|
-| Student name | Oliver Heberle |
-| Student ID | Not supplied in the project files |
-| GitHub repository | https://github.com/s4251498/wp |
-| Published branch | `main` |
-| Development branch | `codex/at3-foundation` |
-| Deployed website | Not deployed / URL not supplied |
+| Student | Oliver Heberle |
+| Student ID | S4251498 |
+| GitHub repository | [s4251498/wp](https://github.com/s4251498/wp) |
+| Submission branch | `main` |
+| Live site | [BookVerse on Saturn](https://saturn.csit.rmit.edu.au/~s4251498/wp/a3/) |
+| Coreteaching host and directory | `saturn.csit.rmit.edu.au`, `~/public_html/wp/a3` |
+| Jacob 5 database | `S4251498_159009` (connection verified from the live application) |
 
-## 1. Project Overview
+## Project overview
 
-BookVerse is a database-backed community book listing site. Visitors can browse the newest four listings, search, filter the collection, view book and seller pages, and open covers in a gallery. Registered users can add listings and edit or delete their own books. Assessment 3 extends the earlier BookVerse work with persistent accounts, authentication, protected CRUD, server-side validation, image upload handling, and owner checks, using HTML, CSS, Bootstrap 5, JavaScript, PHP, and MySQL/MariaDB.
+BookVerse is a PHP and MySQLi book-listing application. Visitors can browse recent books, search, filter the collection, view seller listings, and open cover images in a gallery modal. Registered users can add listings and edit or delete their own listings. The application uses the supplied `users` and `books` schema and runs locally or on RMIT Coreteaching.
 
-## 2. AI Coding Instructions
+## Features
 
-When extending this project:
+- Responsive Bootstrap 5 layout, shared header, navigation, footer, CSS, and JavaScript.
+- Homepage carousel and grid of the four newest books.
+- Collection table with JavaScript status filtering (`Available`, `Reserved`, `Sold`).
+- Search across title, author, and description.
+- Book details, seller listings, and accessible gallery modal.
+- Registration with password hashing, login, logout, session regeneration, and flash feedback.
+- Authenticated book creation, editing, and owner-only deletion with confirmation.
+- Image preview and upload validation; random stored filenames; cover replacement and cleanup.
+- Prepared MySQLi statements, server-side validation, output escaping, CSRF protection, and server-side ownership checks.
 
-- Keep all Assessment 3 work inside `a3/` and follow the supplied `users` and `books` schema and its exact enum values.
-- Use PHP, semantic HTML, the existing Bootstrap 5 CDN include, one stylesheet (`assets/css/style.css`), one script (`assets/js/scripts.js`), and the existing shared includes. Do not add a framework or package dependency without an assessment requirement.
-- Use procedural MySQLi prepared statements for values in SQL. Escape displayed user/database strings with `bv_escape()`; validate IDs and enums server-side.
-- Use `db_connect.inc` and environment variables for non-local database settings; never commit credentials or display raw database errors to visitors.
-- Keep passwords untrimmed, hash them with `password_hash()`, verify with `password_verify()`, regenerate the session ID on login, and destroy the session on logout.
-- Use session flash messages and CSRF tokens for state-changing forms. Keep add/edit/delete access checks on the server and include the current user ID in edit/delete predicates.
-- Validate image extension, MIME type, and size on the server; generate stored filenames; never trust original filenames or a client-side check alone. Preserve an existing cover when edit has no replacement and remove files only when no book references them.
-- Keep browsing pages public. Keep listing mutations owner-only. Keep delete POST-only and show a confirmation before submitting.
-- Preserve responsive Bootstrap layouts, accessible labels/alt text, keyboard-operable gallery controls, status filtering, search, and seller links.
-- Update `assessment-plan.md` and `process-evidence.md` only with checks and work that actually happened. Do not invent deployment details, test results, dates, or personal reflections.
-
-## 3. Website Structure
-
-| File | Purpose |
-|---|---|
-| `index.php` | Displays a carousel and the four newest books. |
-| `books.php` | Lists books and filters by status; links to details and sellers. |
-| `gallery.php` | Shows covers and opens the selected cover in a Bootstrap modal. |
-| `details.php` | Shows one validated listing; displays edit/delete controls to its owner. |
-| `seller.php` | Shows one seller profile and their books. |
-| `search.php` | Searches title, author, genre, and ISBN using a prepared statement. |
-| `register.php`, `login.php`, `logout.php` | Account registration, authentication, and session logout. |
-| `add.php`, `edit.php` | Protected listing creation and owner-only editing. |
-| `process_delete.php` | POST-only owner-authorized deletion and cover cleanup. |
-| `includes/*.inc` | Database, session/security helpers, catalog helpers, header, navigation, and footer. |
-| `assets/css/style.css`, `assets/js/scripts.js` | Shared responsive styles and browser interactions. |
-| `assets/images/cover-placeholder.svg` | Fallback displayed when a stored cover is absent or invalid. |
-
-## 4. Project Folder Structure
+## Project structure
 
 ```text
 a3/
+├── index.php, books.php, gallery.php, details.php, seller.php, search.php
+├── register.php, login.php, logout.php
+├── add.php, edit.php, process_delete.php
+├── bookverse.sql
+├── includes/
+│   ├── db_connect.inc
+│   ├── functions.inc
+│   ├── book_helpers.inc
+│   ├── catalog_helpers.inc
+│   └── header.inc, nav.inc, footer.inc
 ├── assets/
 │   ├── css/style.css
 │   ├── js/scripts.js
-│   └── images/
-│       ├── favicon.svg
-│       ├── cover-placeholder.svg
-│       └── covers/.gitignore, .gitkeep
-├── includes/
-│   ├── book_helpers.inc
-│   ├── catalog_helpers.inc
-│   ├── db_connect.inc
-│   ├── footer.inc
-│   ├── functions.inc
-│   ├── header.inc
-│   └── nav.inc
-├── add.php
-├── books.php
-├── details.php
-├── edit.php
-├── gallery.php
-├── index.php
-├── login.php
-├── logout.php
-├── process_delete.php
-├── register.php
-├── search.php
-├── seller.php
+│   └── images/ (favicon, placeholder, and supplied book covers)
+├── deployment/public_html/.htaccess  # official Canvas template, personalized for deployment
 ├── assessment-plan.md
 ├── demo-notes.md
 ├── process-evidence.md
 └── README.md
 ```
 
-## 5. Technologies
+## Technologies and coding choices
 
-| Technology | Use |
+- PHP with procedural MySQLi, MySQL, semantic HTML5, Bootstrap 5, CSS, and JavaScript.
+- Shared includes provide consistent page structure, session handling, flash messages, and database access.
+- SQL values use prepared statements. Displayed data is escaped with `bv_escape()`/`htmlspecialchars()`.
+- Passwords are stored with `password_hash()` and checked with `password_verify()`; sessions regenerate on login and are destroyed on logout.
+- State-changing forms use POST and CSRF tokens. Edit and delete operations verify the current user owns the listing in server-side queries.
+- Uploads are limited by permitted extensions, detected MIME type, and size. PHP generates random filenames and keeps the existing image when an edit has no replacement.
+- The database connection uses local defaults only for localhost. Production configuration is stored outside the public web directory; no production password is included in this project.
+
+## Database setup
+
+`bookverse.sql` is the supplied schema and sample data. It creates the `bookverse` database and drops/recreates the two tables, so use it only for a fresh disposable local database. Do not run it against the production Jacob 5 database; that would delete its tables and data. The live Jacob 5 connection has already been provisioned and verified.
+
+For local development, import the supplied SQL into a disposable MariaDB/MySQL instance and run the application through XAMPP or another PHP server. Local connection values can be set with `BOOKVERSE_DB_HOST`, `BOOKVERSE_DB_USER`, `BOOKVERSE_DB_PASS`, `BOOKVERSE_DB_NAME`, and `BOOKVERSE_DB_PORT`. On Saturn, `includes/db_connect.inc` reads the account-specific PHP config at `~/bookverse-db-config.php`, outside `public_html`; a named ACL gives the Apache service account read access while other users have no access. Credentials are intentionally omitted here.
+
+## Local run
+
+1. Install PHP with MySQLi and a local MySQL/MariaDB server (the checks recorded here used XAMPP PHP 8.0.30 and MariaDB 10.4.32).
+2. Create a new disposable local database and import `bookverse.sql`.
+3. Place this `a3` directory under the local web root, such as XAMPP `htdocs`.
+4. Start Apache and MySQL, then open `http://localhost/a3/` (adjust the path if the folder name differs).
+5. Register a local test account before testing protected listing actions.
+
+## Testing and verification
+
+| Check | Result |
 |---|---|
-| HTML5/CSS3 | Semantic pages, forms, shared design, and responsive styling. |
-| Bootstrap 5 | Responsive grid, navigation, carousel, modal, form controls, and alerts. |
-| JavaScript | Status filter, cover preview/extension-size checks, gallery modal updates, and existing UI interactions. |
-| PHP 8 | Server-side pages, sessions, validation, uploads, redirects, and page rendering. |
-| MySQL/MariaDB | Supplied `users` and `books` schema for persistent accounts and listings. |
-| Procedural MySQLi | Prepared statements for registration, authentication, listing changes, details, search, and seller queries. |
-| Google Fonts / Material Icons | Shared visual typography and interface icons loaded by `header.inc`. |
-| Git/GitHub | Incremental work is published on `main`; evidence records link work to commits. |
-| XAMPP | Local PHP 8.0.30 and isolated MariaDB 10.4.32 checks. |
-| Coreteaching / Jacob 5 | Deployed on Saturn and connected to Jacob 5. Deployment and access use RMIT MyDesktop; the PHP database config is stored outside `public_html` with Apache-only read access. |
-| AI tools | ChatGPT/Codex assisted implementation and review; detailed prompts and adaptations are in `process-evidence.md`. |
+| PHP syntax | Pass: XAMPP PHP 8.0.30 linted all 19 PHP/include files. |
+| JavaScript syntax | Pass: `node --check a3/assets/js/scripts.js`. |
+| Whitespace | Pass: `git diff --check`. |
+| Local database and routes | Pass for the documented isolated MariaDB sandbox: valid public routes and assets returned 200; invalid book/seller IDs returned 404; anonymous protected routes redirected to login. |
+| Local interactions | Pass for exercised registration, hashing/login/logout, CRUD, uploads, ownership checks, CSRF/method checks, search, status filters, gallery modal, and missing-cover fallback. |
+| HTML validation | Pass: ten rendered states passed the W3C HTML checker with zero errors or warnings. |
+| CSS validation | Inconclusive: the W3C service returned `Reader used` for POST and HTTP 520 for GET. No CSS pass is claimed. |
+| Live Saturn/Jacob 5 | Pass for connection and the exercised site routes, registration/login/logout, create/edit/delete, cover upload, search, Sold filter, and anonymous edit-route protection. Listing 13 was deleted after the test and My Listings showed zero books. |
+| Live cross-owner access | Not verified with two separate live accounts. Local tests covered cross-owner edit/delete rejection. |
+| Phone/tablet viewport and browser console | Pending; the MyDesktop browser session did not provide a usable device viewport or DevTools console. |
 
-## 6. Design and Required Features
+Live pages and feature flows were checked in MyDesktop Chrome because the Saturn URL timed out from the external browser. This is a network-path limitation; the deployed app loaded and its database operations worked in MyDesktop. The test account `bvtest20261101` remains in Jacob 5; its temporary listing and uploaded cover were removed. No test password is included in the project.
 
-The interface carries forward the BookVerse palette and typography from the earlier assessment, with a shared header/navigation/footer and Bootstrap responsive layout. Navigation changes for authenticated users and includes Add Book, My Listings, account name, and POST logout controls.
+## Deployment
 
-| Feature | Implementation |
-|---|---|
-| Latest images and four latest books | Homepage carousel and card grid use the newest four database records. Missing covers use the SVG fallback. |
-| Collection and status filter | `books.php` renders a semantic table with `data-status`; JavaScript filters Available, Reserved, and Sold rows. |
-| Details and seller links | Listing links use validated numeric IDs; details and seller pages query their selected database records. |
-| Seller page | Shows username, optional public location/bio, and that seller's listings. |
-| Gallery | Responsive cover grid with native buttons and an accessible Bootstrap modal. |
-| Search | Prepared search across title, author, genre, and ISBN; input is bounded to 100 characters. |
-| Registration/login/logout | Password hashing/verification, generic login errors, regenerated sessions, POST+CSRF logout, and one-time flash messages. |
-| Add/edit/delete | Protected CRUD, validation, prepared statements, and server-side owner checks. Delete uses POST, CSRF, and a confirmation modal. |
-| Uploads | JPG/JPEG/PNG/GIF/WEBP, 5 MB limit, extension/MIME checks, random filenames, replacement retention/cleanup. |
+The live URL is `https://saturn.csit.rmit.edu.au/~s4251498/wp/a3/`. The target is Saturn at `~/public_html/wp/a3`; the account-specific database config is kept at `~/bookverse-db-config.php`, outside the public web directory. The production PHP runtime was 7.4.33 with MySQLi. A protected diagnostic confirmed the config was readable by Apache and the Jacob 5 database connection succeeded; the temporary diagnostic endpoint was removed from Git and the server after verification.
 
-## 7. Database Design
+The live application loaded its pages and assets and passed the operations listed above. Live cross-owner manipulation, mobile/tablet viewports, and a console audit remain unverified. The official Canvas `Adding .htaccess` guide and `htaccess` template were reviewed. The template is included at `deployment/public_html/.htaccess`, with the placeholder replaced by the RMIT login `s4251498@RMIT.INTERNAL`; its supplied staff-access rule is unchanged. The guide requires the file to be placed at `~/public_html/.htaccess`, not in `a3/`. This prepared file has not yet been installed or retested on Saturn.
 
-Local checks used the supplied SQL in a temporary MariaDB 10.4.32 database. SDAMS reports the Jacob 5 database as `S4251498_159009`, and the official course handout gives host `talsprddb02.int.its.rmit.edu.au` with the student ID as the database username. Production connection and deployment are documented in sections 14–15 below. `db_connect.inc` uses local defaults only for localhost and environment variables for deployment.
+## Git process
 
-| Table | Important fields | Purpose |
-|---|---|---|
-| `users` | `user_id`, `username`, `email`, `password`, `phone`, `location`, `bio`, `joined_at` | Account identity and a password hash; optional seller profile fields. |
-| `books` | `book_id`, `user_id`, `title`, `author`, `genre`, `publication_year`, `isbn`, `description`, `book_condition`, `price`, `image_path`, `status`, `created_at` | Book listing content, owner relationship, and stored cover filename. |
+AT3 is on the repository `main` branch. The overall Git repository currently has 79 commits; 34 commits touch `a3/`. AT3 commits are dated across four real work dates:
 
-Book reads use prepared statements where input is supplied and shared catalog helpers for the home/collection. Registration inserts a user; add inserts a book for the current session user; edit/delete queries include both book and owner IDs. Search binds its keyword parameters. Details and seller pages validate positive integer IDs before querying. The collection reads with a left join so a book with a nullable seller ID remains visible.
+| Date | AT3 commits |
+|---|---:|
+| 18 October 2026 | 6 |
+| 21 October 2026 | 5 |
+| 28 October 2026 | 2 |
+| 1 November 2026 | 21 |
 
-## 8. Shared PHP Includes
+For AT3-only commits, the largest date is `21 / 34 × 100 = 61.8%`, above the rubric's 50% target. Across the complete repository history, it is `21 / 79 × 100 = 26.6%`; assessment interpretation depends on whether the marker counts only AT3 commits or all project history. No dates were fabricated or rewritten. The Git history and process records should be reviewed with this limitation in mind.
 
-| Include | Purpose |
-|---|---|
-| `db_connect.inc` | Opens procedural MySQLi, applies `utf8mb4`, validates port configuration, and avoids embedded deployment secrets. |
-| `functions.inc` | Session cookie settings, escaping, flash messages, redirect, login/access, and CSRF helpers. |
-| `book_helpers.inc` | Positive-ID/input validation, cover path fallback, upload checks, and safe cover cleanup. |
-| `catalog_helpers.inc` | Shared catalog queries, status classes, and reusable book cards. |
-| `header.inc`, `nav.inc`, `footer.inc` | Shared document head/resources, session-aware navigation, flash rendering, and page footer/scripts. |
+## AI use and process evidence
 
-## 9. Authentication and Access Control
+AI assistance was used for planning, implementation review, debugging, testing, documentation, and deployment troubleshooting. Actual prompts, decisions, verification notes, and limitations are recorded in `process-evidence.md`. The student remains responsible for reviewing and understanding all submitted work. The reflection in the process evidence is a draft and must be reviewed and personalized before submission.
 
-Registration validates fields, hashes passwords, inserts with a prepared statement, and logs the new user in. Login accepts username or email and verifies the stored hash. Session IDs are regenerated on login; logout is POST-only, checks CSRF, destroys the authenticated session, and starts a fresh anonymous session for its flash message. Add/edit/delete require authentication; edit/delete and the details-page controls are limited to the listing owner. Public browsing pages do not require login.
+## Known limitations and final checklist
 
-| Route/action | Access | Check |
-|---|---|---|
-| `add.php` | Authenticated users | `bv_require_login()` |
-| `edit.php` | Owner only | Session login plus `book_id` and `user_id` in fetch/update queries |
-| `process_delete.php` | Owner only | POST, CSRF, session login, and owner-scoped select/delete queries |
-| Edit/delete controls | Listing owner | Compare session user ID with the book owner ID |
-| Browse/search/details/gallery/seller | Public | Validated query inputs and escaped output |
-
-## 10. CRUD, Search, and JavaScript
-
-Create is handled by `add.php`; read-all by `books.php`; read-one by `details.php`; update by `edit.php`; delete by `process_delete.php`. Server-side owner predicates prevent changing the URL or submitted ID to edit another person's record. Status filtering uses the row's `data-status` attribute. Search uses a prepared statement. Seller links use the related `user_id`.
-
-The shared JavaScript validates image extensions and size for user feedback, previews a selected cover, updates the gallery modal, and filters status rows. Server-side checks remain authoritative. The delete confirmation modal submits a CSRF-protected POST form.
-
-## 11. Form Handling and Validation
-
-Registration requires username, valid email, password, and confirmation; phone, location, and bio are optional. Login accepts username or email and password. Book forms require title, author, genre, description, condition, price, and status; publication year and ISBN are optional. Add requires a cover, while edit permits no replacement and retains the current file. Search accepts a keyword of up to 100 characters. Labels are associated with controls, HTML constraints improve feedback, and server-side validation remains authoritative. State-changing forms carry a CSRF token.
-
-## 12. Uploads and Security
-
-Uploads are stored under `assets/images/covers/` with a random 32-character hexadecimal filename and accepted image extension. The original name is used only to read the extension. PHP verifies upload status, size, extension, and MIME type. Editing without a new file retains the current cover. Replaced/deleted files are removed only after checking that no book still references them. Missing or unsafe paths display the placeholder. The directory `.gitignore` keeps generated uploads out of Git while retaining its placeholder file; a live cover upload succeeded on Saturn, confirming the application could write an uploaded image there at the time of the check.
-
-Queries use prepared statements, output is escaped, inputs are validated server-side, sessions use HttpOnly/SameSite cookies, state-changing forms use CSRF tokens, and mutation queries check ownership. Detailed database errors go to the server log rather than the visitor. A live cover upload succeeded on Saturn. The HTTPS site opened in MyDesktop Chrome; a full certificate/configuration audit was not performed.
-
-## 13. Accessibility and Usability
-
-Pages use meaningful titles, headings, semantic tables, associated form labels, image alt text, readable status labels, keyboard-operable gallery buttons, visible focus styles, responsive Bootstrap classes, consistent navigation, and session feedback. Browser visual review was done at the available desktop viewport; separate phone/tablet viewport checks and formal CSS validation remain pending.
-
-## 14. Testing and Validation (1 November 2026)
-
-Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in server; they do not constitute deployment verification.
-
-| Check | Result | Notes |
-|---|---|---|
-| PHP syntax | Pass | All 19 current `.php`/`.inc` files passed XAMPP PHP 8.0.30 `php -l` in this session. |
-| JavaScript syntax | Pass | `node --check a3/assets/js/scripts.js`. |
-| Whitespace | Pass | `git diff --check`. |
-| Public pages | Pass | Home, books, gallery, valid details, valid seller, and matching search returned HTTP 200. |
-| Invalid page IDs | Pass | Invalid/missing book ID and unknown seller returned HTTP 404 after the fix. |
-| Anonymous access | Pass | Anonymous add/edit requests redirected with HTTP 303. |
-| Status filter | Pass | Browser selection of Sold left only Sold rows visible. |
-| Search | Pass | Browser search for “Dune” displayed the matching book. |
-| Gallery modal | Pass | Browser activation displayed the selected cover/title in the modal. |
-| Owner controls | Pass | A disposable local account showed its edit/delete controls and delete modal; no destructive delete was submitted. Account and temporary owner change were removed/restored afterward. |
-| Missing cover fallback | Pass | Desktop browser initially showed a broken image for seeded `1.png`; after the fix it displayed the SVG placeholder. |
-| Nullable seller handling | Pass | Temporarily setting a test listing owner to NULL left the book visible with an unavailable-seller label; the database row was restored. |
-| Local assets | Pass | CSS, JavaScript, favicon, and cover placeholder paths existed and loaded locally. |
-| Full CRUD/auth/upload suite | Pass in earlier isolated run | Registration, hash/login/logout, add/edit/delete, upload replacement/cleanup, invalid upload, owner checks, CSRF, and method checks were exercised on Day 2. |
-| Fresh local database setup | Pass | The pre-existing local `bookverse` database was left unchanged after finding it has 12 books but no `users` table. Imported the supplied schema after removing local database-selection and DROP statements into a new `bookverse_at3_verify_20261101` sandbox (3 users, 12 books). |
-| Local route/assets integration | Pass | On the isolated schema, public pages returned 200; CSS, JavaScript, favicon, and cover placeholder returned 200; invalid book/seller IDs returned 404. |
-| Local browser interaction | Pass | Search for Dune returned one result; Reserved and Sold filters showed only matching rows; gallery modal opened with the selected title and placeholder cover. |
-| Local session/ownership checks | Pass | Sample account login showed authenticated navigation; its own book displayed Edit/Delete controls, another user's book did not; delete GET returned 405 while logged in; logout cleared the session; anonymous Add redirected to login. |
-| Responsive phone/tablet widths | Pending | The current browser session did not expose a viewport override. Responsive CSS is present but needs manual device-width review. |
-| W3C HTML checker | Pass | Ten rendered states passed with zero errors/warnings: public pages, login/register, and authenticated add/edit forms. |
-| W3C CSS validator | Inconclusive | The W3C service returned `Reader used` for POST and HTTP 520 for GET; no CSS pass is claimed. |
-| Browser console audit | Pending | Not completed. |
-| Live deployment | Partial pass | On 1 November 2026, the protected Saturn diagnostic confirmed PHP 7.4.33, mysqli available, the private config readable by the Apache service account, and a successful Jacob 5 connection. Live registration, login, logout, anonymous edit-route protection, book creation, edit, delete, cover upload, My Listings, search, and Sold filtering were exercised. Cross-owner access denial, mobile widths, and console audit remain unverified. |
-
-## 15. Deployment
-
-| Item | Details |
-|---|---|
-| Website URL | `https://saturn.csit.rmit.edu.au/~s4251498/wp/a3/` (opened and verified in MyDesktop) |
-| Coreteaching host | `saturn.csit.rmit.edu.au` (official course server details) |
-| Coreteaching target folder | `~/public_html/wp/a3` (live app pages verified) |
-| Jacob 5 database name | `S4251498_159009` as shown in SDAMS; successful connection confirmed by the protected diagnostic and live application operations. |
-| `.htaccess` | No custom AT3 file currently present |
-| Database config | `~/bookverse-db-config.php`, outside `public_html`; owner `s4251498` retains read/write, and a named ACL grants read-only access to the `apache` service account. Group and other users have no access. |
-| Upload permissions | A cover image upload through the live form succeeded; the saved image rendered in My Listings and search results. |
-
-The Jacob 5 connection was verified by the temporary protected diagnostic, which was removed from the repository and server after use. On Saturn, a disposable test account was registered, logged in, logged out, and logged in again. That account created listing ID 13, uploaded a cover, and edited the title and status; the edited listing and cover appeared in My Listings and a matching search returned one result. After the delete test, the site confirmed the listing was deleted and My Listings showed zero books. The test account (`bvtest20261101`) remains in the live database; listing ID 13 and its uploaded cover were removed. The test confirmed owner controls were shown for that account's own listing, but did not attempt cross-owner URL manipulation. Existing sample records include missing cover files and at least one unavailable seller, which the UI handles with fallbacks. No production credentials are stored in this project.
-
-## 16. Git and Development Process
-
-Work is organized into four planned stages, with dated implementation days on 18 October, 21 October, 28 October, and 1 November 2026. Commits show the foundation, protected CRUD/authentication, browsing features, and integration fixes/docs as separate increments on `main`. `process-evidence.md` links AI tasks and debugging records to their implementation commits. Recalculate the final date/commit distribution before submission; commit count is only a rough proxy for effort.
-
-## 17. AI Use and Process Evidence
-
-AI helped inspect requirements, build and review shared PHP/auth/CRUD/browsing code, and identify integration issues. The process log contains eight AI task records and seven debugging records with verification limits recorded. The student must personally review this code, complete the final reflection, and ensure they can explain each part before attesting to the assessment declaration.
-
-`demo-notes.md` contains a rehearsal walkthrough for the later individual demonstration. The 25-mark demonstration has not yet occurred and is not represented as completed work.
-
-## 18. Known Limitations
-
-- Live registration/login/logout, anonymous protection for the edit route, listing creation/editing/deletion, cover upload, search, Sold status filtering, and the Jacob 5 connection have been verified on Saturn. Cross-owner access denial, mobile viewport checks, and a full browser console audit remain outstanding.
-- The supplied ZIP has no cover images. Existing database filenames that are missing locally use the placeholder; suitable real covers can be added through the upload form.
-- Exact comparison with the assessment screenshots, mobile/tablet browser checks, CSS validation (W3C endpoint failed), and a browser console audit remain outstanding.
-- The student ID, personal reflection, and live demonstration must be completed by the student.
+- The live cross-owner URL-manipulation check has not been run with two live accounts; local cross-owner authorization tests passed.
+- Phone/tablet layout, live console errors, CSS validation, and exact comparison with all supplied screenshots remain unverified or inconclusive.
+- The account `bvtest20261101` remains on Jacob 5, but its test listing and uploaded cover have been removed.
+- The README/process reflection needs the student's personal review and personalization. The one-on-one demonstration has not taken place; see `demo-notes.md`.
+- Install `deployment/public_html/.htaccess` as `~/public_html/.htaccess` following the Canvas guide, then test the live site in MyDesktop and verify the authorized RMIT login and staff access still work.

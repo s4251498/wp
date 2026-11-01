@@ -1,31 +1,34 @@
-# BookVerse Assessment 3 Demonstration Notes
+# BookVerse — Individual Demo Rehearsal
 
-Use this as a rehearsal outline for the individual demonstration. Explain the code in your own words and use a demo account with listings already prepared. Do not use production credentials during the demonstration.
+The individual demonstration is worth 25 marks. This is a rehearsal guide; the student should explain the submitted code in their own words and be ready to answer follow-up questions.
 
-## Suggested walkthrough (about 6–8 minutes)
+## Suggested walkthrough (6–8 minutes)
 
-1. **Anonymous browsing:** show the home carousel and latest four database listings in `index.php`; open one detail page and follow its seller link.
-2. **Collection and discovery:** show the `books.php` table, filter by Available/Reserved/Sold, search by title or author, then show a keyword result in `search.php`.
-3. **Gallery:** open a cover in the Bootstrap modal and explain how the native button supports keyboard activation.
-4. **Account and ownership:** log in with the demo account, point out the authenticated navigation, open one owned listing, and show the edit and delete controls. Open the delete confirmation and cancel it.
-5. **Listing lifecycle:** add a listing with an image, edit a field without replacing its image, then (if time and a prepared disposable listing allow) replace the image and delete the disposable listing after confirming it is safe to remove.
-6. **Implementation explanation:** show `includes/db_connect.inc`, `functions.inc`, and `book_helpers.inc`; explain environment-based configuration, password hashing/verification, sessions and flash messages, prepared statements, CSRF tokens, server-side ownership checks, upload MIME/size validation, random filenames, and escaping output.
-7. **Process evidence:** point to `assessment-plan.md` and `process-evidence.md`, explain one real bug and its verification, and show the progressive Git commits on `codex/at3-foundation`.
+1. **Public browsing:** open the deployed home page, explain the four newest listings, open a detail page, and follow the seller link.
+2. **Find a book:** show the books table and JavaScript filter (`Available`, `Reserved`, `Sold`), then submit a title/author/description search.
+3. **Gallery:** open a cover in the Bootstrap modal and explain the event handler in `assets/js/scripts.js`.
+4. **Authentication:** log in to an account you control; point out the session-aware navigation and open your seller listings.
+5. **CRUD:** add a disposable listing with a cover, view it, edit it, then show the delete confirmation and delete only that disposable record if the assessor asks. Do not delete a real listing.
+6. **Security:** explain password hashing, prepared statements, CSRF tokens, escaping, server-side validation, and owner checks in `includes/functions.inc`, `includes/book_helpers.inc`, `edit.php`, and `process_delete.php`.
+7. **Deployment and process:** explain the private database config outside `public_html`, how Jacob 5 is reached, and show the real commit progression on `main` plus the relevant records in `process-evidence.md`.
 
-## Rehearse these explanations
+## Topics to explain from this code
 
-- How an SQL placeholder and `mysqli_stmt_bind_param()` keep submitted values separate from SQL syntax.
-- Why password hashes are stored and how `password_verify()` checks a login.
-- How the session `user_id` is used for access checks and how owner IDs are included in edit/delete database queries.
-- Why delete uses POST plus a CSRF token and confirmation modal.
-- How PHP checks both the filename extension and actual MIME type, limits upload size, and generates an unpredictable stored name.
-- How `htmlspecialchars()` and the shared header/navigation/footer helpers improve safety and consistency.
-- What the isolated tests cover and what remains untested: live deployment, exact assessment screenshot comparison, and small-screen browser review.
+- HTTP request/response and client/server flow: a form submits to PHP; PHP validates, queries MySQLi, sets a flash message, then redirects.
+- Includes: `header.inc`, `nav.inc`, and `footer.inc` keep the page shell consistent; `db_connect.inc` opens one configured MySQLi connection.
+- SQL safety: prepared statements bind values separately from SQL syntax; output uses `bv_escape()`/`htmlspecialchars()`.
+- Authentication vs authorization: a session identifies the logged-in user; edit/delete queries also require the listing's `user_id` to match that user.
+- Passwords and sessions: `password_hash()` stores a one-way hash; `password_verify()` checks it; login regenerates the session ID; logout destroys the session.
+- CSRF: state-changing POST forms include a session token, checked on the server.
+- Uploads: PHP checks upload status, size, extension, and MIME; it generates a random filename and safely retains/replaces/removes cover files.
+- JavaScript: `scripts.js` previews uploads, validates client-side feedback, filters rows, handles gallery modal content, and confirms deletion. PHP remains authoritative.
+- Database structure: `users.user_id` and `books.user_id` link owners to listings; `book_id` identifies a book.
+- Git and evidence: work is on `main`; explain one genuine bug and its commit/test record.
 
-## Before presenting
+## Before the demonstration
 
-- Verify the deployed URL, database connection, uploads directory permissions, and sample records on the day of the demonstration.
-- Make sure the demo account can log in and owns the listing used for edit/delete controls.
-- Keep a second browser session logged out to show the anonymous experience if useful.
-- Do not delete a real listing during the demonstration; use a disposable demo listing.
-- Be ready to explain and adapt the code independently. The assessment demonstration is an individual explanation of the submitted project.
+- Rehearse logging in with an account you control and confirm it owns the disposable listing used in the walkthrough.
+- Check the live URL and database-backed routes in MyDesktop; the external Saturn route previously timed out.
+- Be prepared to state honestly that live cross-owner manipulation, phone/tablet viewports, the live browser console, formal CSS validation, and exact screenshot comparison remain unverified or inconclusive.
+- Review and personalize the reflection draft in `process-evidence.md`; do not claim experiences that are not yours.
+- Do not expose passwords or production configuration on screen.
