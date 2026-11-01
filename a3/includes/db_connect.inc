@@ -19,16 +19,27 @@ if ($isLocalServer) {
     $dbPass = getenv('BOOKVERSE_DB_PASS');
     $dbName = getenv('BOOKVERSE_DB_NAME');
 
-    $privateConfigPath = dirname(__DIR__, 4) . '/bookverse-db-config.php';
-    if ((!$dbHost || !$dbUser || !$dbPass || !$dbName) && is_readable($privateConfigPath)) {
-        $privateConfig = require $privateConfigPath;
-        if (is_array($privateConfig)) {
-            $dbHost = $dbHost ?: ($privateConfig['host'] ?? null);
-            $dbUser = $dbUser ?: ($privateConfig['user'] ?? null);
-            $dbPass = $dbPass ?: ($privateConfig['password'] ?? null);
-            $dbName = $dbName ?: ($privateConfig['database'] ?? null);
-            if (!getenv('BOOKVERSE_DB_PORT') && isset($privateConfig['port'])) {
-                putenv('BOOKVERSE_DB_PORT=' . (int) $privateConfig['port']);
+    $privateConfigPath = '../../../../bookverse-db-config.php';
+    if (!$dbHost || !$dbUser || !$dbPass || !$dbName) {
+        // Resolve the private file from this include directory. Coreteaching's
+        // PHP path policy can reject an absolute path to the same home file.
+        $previousWorkingDirectory = getcwd();
+        if ($previousWorkingDirectory !== false && @chdir(__DIR__)) {
+            try {
+                if (is_readable($privateConfigPath)) {
+                    $privateConfig = require $privateConfigPath;
+                    if (is_array($privateConfig)) {
+                        $dbHost = $dbHost ?: ($privateConfig['host'] ?? null);
+                        $dbUser = $dbUser ?: ($privateConfig['user'] ?? null);
+                        $dbPass = $dbPass ?: ($privateConfig['password'] ?? null);
+                        $dbName = $dbName ?: ($privateConfig['database'] ?? null);
+                        if (!getenv('BOOKVERSE_DB_PORT') && isset($privateConfig['port'])) {
+                            putenv('BOOKVERSE_DB_PORT=' . (int) $privateConfig['port']);
+                        }
+                    }
+                }
+            } finally {
+                @chdir($previousWorkingDirectory);
             }
         }
     }
