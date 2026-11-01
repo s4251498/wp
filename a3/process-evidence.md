@@ -442,12 +442,56 @@ No deployment credentials, database name, deployment folder, or live URL are ava
 
 ---
 
+## AI Task 7
+
+**Date:**
+01/11/2026
+
+**Task Description:**
+Move the completed AT3 work onto the repository's default branch, review deployment and final-check status, and prepare a reflection draft from the recorded project evidence.
+
+**Tool Used:**
+ChatGPT / Codex
+
+**Prompt / Input:**
+The user asked why AT3 was not on `main`, directed Codex to fix that immediately, and requested live deployment, the remaining checks, and a reflection. The user also emphasized retaining four real work dates in Git history.
+
+**AI Output Summary:**
+Codex verified that `origin/main` was an ancestor of the completed `codex/at3-foundation` branch, fast-forwarded local `main` to the AT3 branch, pushed `main`, fetched from GitHub, and confirmed the remote and local `main` resolve to `c6f329a`. It checked the project files and environment for Coreteaching/Jacob 5 deployment details; no live URL, deployment path, or credentials were available. A W3C CSS validator request returned HTTP 500, so formal validation was not claimed. Codex prepared a reflection draft grounded in recorded work and marked it for the student's review.
+
+**What You Accepted:**
+Keep the authentic four-date commit history, publish the finished implementation on `main`, report unavailable deployment access honestly, and treat the reflection as a draft requiring personal review.
+
+**What You Changed:**
+The assessment plan now records `main` as the published branch, the exact commit-date count and distribution, and remaining deployment/validation limitations. The final reflection section now has an evidence-based draft. These changes do not add fabricated work dates or test results.
+
+**Validation Performed:**
+`git fetch origin` confirmed `main` and `origin/main` both resolve to `c6f329a` after the push; the working tree was clean at that checkpoint. The history contains four real AT3 work dates. Deployment was not possible without the required hosting access. The CSS validator returned HTTP 500 and is recorded as inconclusive, not a pass.
+
+**Issues Identified:**
+The live site, small-screen browser viewports, browser console, formal HTML/CSS validation, and exact screenshot comparison still require access or a usable validator/browser setup. The student must review and personalize the reflection before submission and complete the individual demonstration.
+
+**Related Commit:**
+This process record accompanies the current documentation update; the final documentation commit link will be recorded in a follow-up evidence edit.
+
+---
+
 # 📌 Final Reflection (End of Assessment)
+
+> **AI-assisted draft for student review:** This is based on the recorded project work and checks. Edit it so it accurately reflects your own learning and experience before submitting.
 
 **What AI was most useful for:**
 
+AI was most useful for helping me trace the assessment requirements to specific pages and plan the implementation in stages. It also helped me review the PHP, SQL, and browser behavior together. The integration checks caught issues that were not obvious from reading the code alone, including missing cover files, incorrect not-found responses, and books with no matching seller. I treated generated code and explanations as suggestions and checked them against the supplied schema and local results.
+
 **Where AI was incorrect or misleading:**
+
+AI-generated implementation was not automatically correct or complete. Some work initially had only code-level review and needed later database and browser checks. The Day 3 notes also correctly left those checks pending instead of implying the pages were fully verified. The Git work was initially pushed to `codex/at3-foundation` while the repository's `main` branch still lacked AT3; after I pointed this out, the branch was fast-forwarded to `main` and the remote was checked. I should verify the target branch and test evidence rather than relying on an assistant's summary.
 
 **What you learned about debugging:**
 
+I learned to reproduce a symptom, identify the layer causing it, make a focused change, and verify the result with a relevant check. For example, a broken cover was traced to a database filename whose image did not exist on disk; the fix was to use the placeholder when the file is absent, then reload the page and check the placeholder response. Testing invalid IDs and a nullable book owner also showed why response codes and database relationships matter, not just whether a page appears.
+
 **How your approach changed over time:**
+
+I started by mapping the rubric and existing schema, then built the shared application foundation and authentication/protected listing actions before adding the public browsing pages. I used an isolated local database for integration checks and recorded limitations instead of claiming deployment was tested. The project is now on `main`, but the hosted Coreteaching/Jacob 5 setup, small-screen browser checks, formal markup/style validation, and the individual demonstration still need attention. I need to review this draft, understand the code well enough to explain it, and personally rehearse the demonstration.
