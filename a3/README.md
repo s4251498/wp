@@ -98,7 +98,7 @@ a3/
 | Google Fonts / Material Icons | Shared visual typography and interface icons loaded by `header.inc`. |
 | Git/GitHub | Incremental work is published on `main`; evidence records link work to commits. |
 | XAMPP | Local PHP 8.0.30 and isolated MariaDB 10.4.32 checks. |
-| Coreteaching / Jacob 5 | Deployment is pending. Course instructions require connecting through RMIT MyDesktop because direct access from outside RMIT is disabled during the response to a PHP vulnerability. |
+| Coreteaching / Jacob 5 | Deployed on Saturn and connected to Jacob 5. Deployment and access use RMIT MyDesktop; the PHP database config is stored outside `public_html` with Apache-only read access. |
 | AI tools | ChatGPT/Codex assisted implementation and review; detailed prompts and adaptations are in `process-evidence.md`. |
 
 ## 6. Design and Required Features
@@ -198,20 +198,21 @@ Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in s
 | W3C HTML checker | Pass | Ten rendered states passed with zero errors/warnings: public pages, login/register, and authenticated add/edit forms. |
 | W3C CSS validator | Inconclusive | The W3C service returned `Reader used` for POST and HTTP 520 for GET; no CSS pass is claimed. |
 | Browser console audit | Pending | Not completed. |
-| Live deployment | Pending | Course announcements require MyDesktop access during the worldwide PHP vulnerability response. PuTTY connected to Saturn and reached its login prompt; authentication, upload, Jacob 5 schema migration, and app-level live testing remain outstanding. |
+| Live deployment | Partial pass | On 1 November 2026, the protected Saturn diagnostic confirmed PHP 7.4.33, mysqli available, the private config readable by the Apache service account, and a successful Jacob 5 connection. The live homepage, Books list, book details, Gallery/modal, Register, and Log in pages rendered. Authenticated CRUD, account flows, file upload, and responsive browser checks remain unverified live. |
 
 ## 15. Deployment
 
 | Item | Details |
 |---|---|
-| Website URL | Expected from the official course path pattern: `https://saturn.csit.rmit.edu.au/~s4251498/wp/a3/`; not yet verified live |
+| Website URL | `https://saturn.csit.rmit.edu.au/~s4251498/wp/a3/` (opened and verified in MyDesktop) |
 | Coreteaching host | `saturn.csit.rmit.edu.au` (official course server details) |
-| Coreteaching target folder | `~/public_html/wp/a3` after cloning/updating the `wp` repository, subject to checking the actual server checkout |
+| Coreteaching target folder | `~/public_html/wp/a3` (live app pages verified) |
 | Jacob 5 database name | `S4251498_159009` as shown in SDAMS; verify case and account access before use |
 | `.htaccess` | No custom AT3 file currently present |
-| Upload permissions | Must be checked on the deployment host |
+| Database config | `~/bookverse-db-config.php`, outside `public_html`; owner `s4251498` retains read/write, and a named ACL grants read-only access to the `apache` service account. Group and other users have no access. |
+| Upload permissions | Not yet verified live |
 
-Live authentication, database, paths, sessions, and upload permissions remain unverified. The current authorized route is through MyDesktop/PuTTY; authentication did not complete, so no server changes have been made. Configure `BOOKVERSE_DB_HOST`, `BOOKVERSE_DB_USER`, `BOOKVERSE_DB_PASS`, `BOOKVERSE_DB_NAME`, and optionally `BOOKVERSE_DB_PORT` in a server-side environment/private configuration. No production credentials are stored in this project.
+The Jacob 5 connection was verified by the temporary protected diagnostic. The homepage, list, detail, gallery/modal, registration, and login routes rendered on Saturn. Existing sample records include missing cover files and at least one unavailable seller, which the UI handles with fallbacks. Live registration/login submissions, CRUD, logout/session behavior, search results, uploads, and upload-directory permissions still need verification. No production credentials are stored in this project. The temporary diagnostic endpoint is removed from Git after this deployment record; keep it removed from the server as well.
 
 ## 16. Git and Development Process
 
@@ -225,7 +226,7 @@ AI helped inspect requirements, build and review shared PHP/auth/CRUD/browsing c
 
 ## 18. Known Limitations
 
-- The project has not been deployed or live-tested. The expected Coreteaching path, course server hostname, and Jacob 5 database name are documented, but authentication, account access, actual remote checkout state, schema compatibility, and live URL response still need verification.
+- Authenticated live account and CRUD flows, file uploads, upload permissions, responsive browser checks, and a full browser console audit remain outstanding. Basic live page rendering and the Jacob 5 connection have been verified on Saturn.
 - The supplied ZIP has no cover images. Existing database filenames that are missing locally use the placeholder; suitable real covers can be added through the upload form.
 - Exact comparison with the assessment screenshots, mobile/tablet browser checks, CSS validation (W3C endpoint failed), and a browser console audit remain outstanding.
 - The student ID, personal reflection, and live demonstration must be completed by the student.
