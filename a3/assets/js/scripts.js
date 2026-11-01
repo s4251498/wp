@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const file = this.files[0];
 
             if (!file) {
-                imagePreview.src = '';
                 imagePreview.classList.add('d-none');
                 return;
             }
@@ -92,7 +91,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 );
 
                 this.value = '';
-                imagePreview.src = '';
                 imagePreview.classList.add('d-none');
 
                 return;
@@ -110,7 +108,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 );
 
                 this.value = '';
-                imagePreview.src = '';
                 imagePreview.classList.add('d-none');
 
                 return;

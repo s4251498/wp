@@ -136,6 +136,7 @@ require_once __DIR__ . '/includes/nav.inc';
                             <label class="form-label" for="status">Status</label>
                             <?php $selectedStatus = bv_post_string($_POST, 'status') ?: 'Available'; ?>
                             <select class="form-select" id="status" name="status" required>
+                                <option value="">Choose a status</option>
                                 <?php foreach (['Available', 'Reserved', 'Sold'] as $statusOption): ?>
                                     <option value="<?= bv_escape($statusOption) ?>"<?= $selectedStatus === $statusOption ? ' selected' : '' ?>><?= bv_escape($statusOption) ?></option>
                                 <?php endforeach; ?>
@@ -150,7 +151,7 @@ require_once __DIR__ . '/includes/nav.inc';
                             <input class="form-control" id="image_path" name="image_path" type="file" accept=".jpg,.jpeg,.png,.gif,.webp,image/jpeg,image/png,image/gif,image/webp" required>
                             <div class="form-text">JPG, PNG, GIF, or WEBP; maximum 5 MB.</div>
                             <div class="image-preview-container">
-                                <img id="imagePreview" class="img-fluid d-none" src="" alt="Preview of selected book cover">
+                            <img id="imagePreview" class="img-fluid d-none" src="<?= bv_escape(bv_cover_src(null)) ?>" alt="Preview of selected book cover">
                             </div>
                         </div>
                         <div class="col-12 d-flex flex-wrap gap-2 mt-4">

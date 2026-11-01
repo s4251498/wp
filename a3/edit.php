@@ -165,6 +165,7 @@ require_once __DIR__ . '/includes/nav.inc';
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="book_condition">Condition</label>
                             <select class="form-select" id="book_condition" name="book_condition" required>
+                                <option value="">Choose a condition</option>
                                 <?php foreach (['New', 'Gently Used', 'Fair'] as $conditionOption): ?>
                                     <option value="<?= bv_escape($conditionOption) ?>"<?= $formData['book_condition'] === $conditionOption ? ' selected' : '' ?>><?= bv_escape($conditionOption) ?></option>
                                 <?php endforeach; ?>
@@ -177,6 +178,7 @@ require_once __DIR__ . '/includes/nav.inc';
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="status">Status</label>
                             <select class="form-select" id="status" name="status" required>
+                                <option value="">Choose a status</option>
                                 <?php foreach (['Available', 'Reserved', 'Sold'] as $statusOption): ?>
                                     <option value="<?= bv_escape($statusOption) ?>"<?= $formData['status'] === $statusOption ? ' selected' : '' ?>><?= bv_escape($statusOption) ?></option>
                                 <?php endforeach; ?>
@@ -196,7 +198,7 @@ require_once __DIR__ . '/includes/nav.inc';
                                 </div>
                             <?php else: ?>
                                 <div class="image-preview-container">
-                                    <img id="imagePreview" class="img-fluid d-none" src="" alt="Preview of selected book cover">
+                                    <img id="imagePreview" class="img-fluid d-none" src="<?= bv_escape(bv_cover_src(null)) ?>" alt="Preview of selected book cover">
                                 </div>
                             <?php endif; ?>
                         </div>

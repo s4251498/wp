@@ -96,7 +96,7 @@ a3/
 | MySQL/MariaDB | Supplied `users` and `books` schema for persistent accounts and listings. |
 | Procedural MySQLi | Prepared statements for registration, authentication, listing changes, details, search, and seller queries. |
 | Google Fonts / Material Icons | Shared visual typography and interface icons loaded by `header.inc`. |
-| Git/GitHub | Incremental commits on `codex/at3-foundation`; evidence records link work to commits. |
+| Git/GitHub | Incremental work is published on `main`; evidence records link work to commits. |
 | XAMPP | Local PHP 8.0.30 and isolated MariaDB 10.4.32 checks. |
 | Coreteaching / Jacob 5 | Deployment is pending. Course instructions require connecting through RMIT MyDesktop because direct access from outside RMIT is disabled during the response to a PHP vulnerability. |
 | AI tools | ChatGPT/Codex assisted implementation and review; detailed prompts and adaptations are in `process-evidence.md`. |
@@ -168,7 +168,7 @@ Queries use prepared statements, output is escaped, inputs are validated server-
 
 ## 13. Accessibility and Usability
 
-Pages use meaningful titles, headings, semantic tables, associated form labels, image alt text, readable status labels, keyboard-operable gallery buttons, visible focus styles, responsive Bootstrap classes, consistent navigation, and session feedback. Browser visual review was done at the available desktop viewport; separate phone/tablet viewport checks and formal HTML/CSS validator runs are still pending.
+Pages use meaningful titles, headings, semantic tables, associated form labels, image alt text, readable status labels, keyboard-operable gallery buttons, visible focus styles, responsive Bootstrap classes, consistent navigation, and session feedback. Browser visual review was done at the available desktop viewport; separate phone/tablet viewport checks and formal CSS validation remain pending.
 
 ## 14. Testing and Validation (1 November 2026)
 
@@ -176,7 +176,7 @@ Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in s
 
 | Check | Result | Notes |
 |---|---|---|
-| PHP syntax | Pass | All 19 current `.php`/`.inc` files passed `php -l`. |
+| PHP syntax | Pass | All 19 current `.php`/`.inc` files passed XAMPP PHP 8.0.30 `php -l` in this session. |
 | JavaScript syntax | Pass | `node --check a3/assets/js/scripts.js`. |
 | Whitespace | Pass | `git diff --check`. |
 | Public pages | Pass | Home, books, gallery, valid details, valid seller, and matching search returned HTTP 200. |
@@ -190,10 +190,15 @@ Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in s
 | Nullable seller handling | Pass | Temporarily setting a test listing owner to NULL left the book visible with an unavailable-seller label; the database row was restored. |
 | Local assets | Pass | CSS, JavaScript, favicon, and cover placeholder paths existed and loaded locally. |
 | Full CRUD/auth/upload suite | Pass in earlier isolated run | Registration, hash/login/logout, add/edit/delete, upload replacement/cleanup, invalid upload, owner checks, CSRF, and method checks were exercised on Day 2. |
+| Fresh local database setup | Pass | The pre-existing local `bookverse` database was left unchanged after finding it has 12 books but no `users` table. Imported the supplied schema after removing local database-selection and DROP statements into a new `bookverse_at3_verify_20261101` sandbox (3 users, 12 books). |
+| Local route/assets integration | Pass | On the isolated schema, public pages returned 200; CSS, JavaScript, favicon, and cover placeholder returned 200; invalid book/seller IDs returned 404. |
+| Local browser interaction | Pass | Search for Dune returned one result; Reserved and Sold filters showed only matching rows; gallery modal opened with the selected title and placeholder cover. |
+| Local session/ownership checks | Pass | Sample account login showed authenticated navigation; its own book displayed Edit/Delete controls, another user's book did not; delete GET returned 405 while logged in; logout cleared the session; anonymous Add redirected to login. |
 | Responsive phone/tablet widths | Pending | The current browser session did not expose a viewport override. Responsive CSS is present but needs manual device-width review. |
-| HTML/CSS standards validators | Pending | Not run. |
+| W3C HTML checker | Pass | Ten rendered states passed with zero errors/warnings: public pages, login/register, and authenticated add/edit forms. |
+| W3C CSS validator | Inconclusive | The W3C service returned `Reader used` for POST and HTTP 520 for GET; no CSS pass is claimed. |
 | Browser console audit | Pending | Not completed. |
-| Live deployment | Pending | Course announcements require MyDesktop access during the worldwide PHP vulnerability response. PuTTY connected to Saturn and reached its login prompt; authentication, upload, Jacob 5 schema migration, app-level live testing, and static asset checks remain outstanding. |
+| Live deployment | Pending | Course announcements require MyDesktop access during the worldwide PHP vulnerability response. PuTTY connected to Saturn and reached its login prompt; authentication, upload, Jacob 5 schema migration, and app-level live testing remain outstanding. |
 
 ## 15. Deployment
 
@@ -206,11 +211,11 @@ Checks below used an isolated local database and the XAMPP PHP 8.0.30 built-in s
 | `.htaccess` | No custom AT3 file currently present |
 | Upload permissions | Must be checked on the deployment host |
 
-Live authentication, database, paths, sessions, and upload permissions remain unverified. The current authorized route is through MyDesktop/PuTTY; the app reached the Saturn authentication prompt, but the credential has not been submitted through the remote input bridge. Configure `BOOKVERSE_DB_HOST`, `BOOKVERSE_DB_USER`, `BOOKVERSE_DB_PASS`, `BOOKVERSE_DB_NAME`, and optionally `BOOKVERSE_DB_PORT` in a server-side environment/private configuration. No production credentials are stored in this project.
+Live authentication, database, paths, sessions, and upload permissions remain unverified. The current authorized route is through MyDesktop/PuTTY; authentication did not complete, so no server changes have been made. Configure `BOOKVERSE_DB_HOST`, `BOOKVERSE_DB_USER`, `BOOKVERSE_DB_PASS`, `BOOKVERSE_DB_NAME`, and optionally `BOOKVERSE_DB_PORT` in a server-side environment/private configuration. No production credentials are stored in this project.
 
 ## 16. Git and Development Process
 
-Work is organized into four planned stages, with dated implementation days on 18 October, 21 October, 28 October, and 1 November 2026. Commits show the foundation, protected CRUD/authentication, browsing features, and integration fixes/docs as separate increments. `process-evidence.md` links AI tasks and debugging records to their implementation commits. Recalculate the final date/commit distribution before submission; commit count is only a rough proxy for effort.
+Work is organized into four planned stages, with dated implementation days on 18 October, 21 October, 28 October, and 1 November 2026. Commits show the foundation, protected CRUD/authentication, browsing features, and integration fixes/docs as separate increments on `main`. `process-evidence.md` links AI tasks and debugging records to their implementation commits. Recalculate the final date/commit distribution before submission; commit count is only a rough proxy for effort.
 
 ## 17. AI Use and Process Evidence
 
@@ -222,5 +227,5 @@ AI helped inspect requirements, build and review shared PHP/auth/CRUD/browsing c
 
 - The project has not been deployed or live-tested. The expected Coreteaching path, course server hostname, and Jacob 5 database name are documented, but authentication, account access, actual remote checkout state, schema compatibility, and live URL response still need verification.
 - The supplied ZIP has no cover images. Existing database filenames that are missing locally use the placeholder; suitable real covers can be added through the upload form.
-- Exact comparison with the assessment screenshots, mobile/tablet browser checks, formal HTML/CSS validation, and a browser console audit remain outstanding.
+- Exact comparison with the assessment screenshots, mobile/tablet browser checks, CSS validation (W3C endpoint failed), and a browser console audit remain outstanding.
 - The student ID, personal reflection, and live demonstration must be completed by the student.

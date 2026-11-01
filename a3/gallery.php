@@ -31,10 +31,10 @@ require_once __DIR__ . '/includes/nav.inc';
                 </article></div>
             <?php endforeach; ?>
         </div></section>
-        <div class="modal fade" id="bookImageModal" tabindex="-1" aria-labelledby="bookImageModalLabel" aria-hidden="true">
+        <div class="modal fade" id="bookImageModal" role="dialog" tabindex="-1" aria-labelledby="bookImageModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content">
                 <div class="modal-header"><h2 class="modal-title fs-5" id="bookImageModalLabel">Book cover</h2><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
-                <div class="modal-body text-center"><img id="galleryModalImage" src="" alt="" class="gallery-modal-image"></div>
+                <div class="modal-body text-center"><img id="galleryModalImage" src="<?= bv_escape(bv_cover_src(null)) ?>" alt="Book cover preview" class="gallery-modal-image"></div>
             </div></div>
         </div>
     <?php else: ?>
