@@ -20,7 +20,7 @@ if ($isLocalServer) {
     $dbName = getenv('BOOKVERSE_DB_NAME');
 
     $privateConfigPath = dirname(__DIR__, 4) . '/bookverse-db-config.php';
-    if ((!$dbHost || !$dbUser || !$dbName) && is_readable($privateConfigPath)) {
+    if ((!$dbHost || !$dbUser || !$dbPass || !$dbName) && is_readable($privateConfigPath)) {
         $privateConfig = require $privateConfigPath;
         if (is_array($privateConfig)) {
             $dbHost = $dbHost ?: ($privateConfig['host'] ?? null);
