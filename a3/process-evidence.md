@@ -506,7 +506,7 @@ All 12 `.php` files and 7 `.inc` files passed XAMPP PHP 8.0.30 syntax lint. `nod
 The credential can be read from the local file, but the remote Citrix terminal does not accept the local clipboard through the available browser input bridge. A user must privately enter the RMIT password at the open PuTTY prompt, then tell Codex when authentication has completed. Remaining checks include inspecting server Git state, deploying the correct `main` checkout, safely migrating the existing Jacob 5 schema, configuring private PHP connection settings, setting required paths/permissions, and testing all live features and assets. Formal HTML/CSS validation, small-screen checks, and the browser console audit also remain outstanding.
 
 **Related Commit:**
-To be linked after committing this truthful deployment-progress entry.
+`da08e49` — https://github.com/s4251498/wp/commit/da08e49 (deployment-progress documentation). This entry was completed in the follow-up evidence-link commit.
 
 ---
 
